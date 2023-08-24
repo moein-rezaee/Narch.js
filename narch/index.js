@@ -7,8 +7,6 @@ const appCommands = {
   run,
 };
 
-cli.run(appCommands);
-
 function run() {
   const server = http.createServer((req, res) => {
     if (req.url == "/") {
@@ -19,3 +17,5 @@ function run() {
   server.listen(3000);
   console.log("Narch server started on: http://localhost:3000");
 }
+
+cli.run(appCommands);
