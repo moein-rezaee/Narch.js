@@ -20,9 +20,7 @@
   "author": "Moein Rezaee",
   "license": "ISC",
   "dependencies": {
-    "fs-manager": "file:../modules/fs-manager",
-    "inquirer": "^8.2.5",
-    "yargs": "^17.7.2"
+    "narch-cli": "file:../modules/narch-cli"
   },
   "devDependencies": {
     "@babel/cli": "^7.22.10",

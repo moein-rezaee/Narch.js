@@ -1,6 +1,6 @@
 const cli = require("./cli");
 
-class parser extends cli {
+class cliNarch extends cli {
   argv;
   constructor() {
     super();
@@ -16,11 +16,10 @@ class parser extends cli {
     if (key) {
       const command = this.getCommand(key);
       super.run(key, command, (res) => {
-        const clsCommand = require(`./narch-cli/${command}.js`);
+        const clsCommand = require(`./sections/${command}.js`);
         const funcName = res[command];
         clsCommand[funcName]();
       });
-      // cliCommands[key][command]();
     } else {
       const list = this.getCommands();
       const command = this.getFirst(list);
@@ -51,4 +50,4 @@ class parser extends cli {
   }
 }
 
-module.exports = new parser();
+module.exports = new cliNarch();

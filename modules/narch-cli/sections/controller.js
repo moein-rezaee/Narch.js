@@ -1,6 +1,5 @@
-const cli = require("./cli");
-const filesConf = require("./configs/files.conf");
-const { CMD, KEY } = require("./constants");
+const cli = require("../cli");
+const { CMD, KEY } = require("../constants");
 
 class controller extends cli {
   constructor() {
@@ -15,11 +14,13 @@ class controller extends cli {
     this.create(CMD.CONTROLLER.RESTFUL);
   }
 
-  create(command) {
-    this.run(KEY.CREATE, command, ({ name }) => {
+  create(funcName) {
+    const command = "controller";
+    this.runFunc(KEY.CREATE, command, funcName, ({ name }) => {
       const info = this.getInfo(name);
       this.fs.createFolder(info.path);
-      this.fs.whrite(info.name, filesConf[command](name));
+      const content = this.getFileContent(command, funcName, name);
+      this.fs.whrite(info.name, content);
     });
   }
 
