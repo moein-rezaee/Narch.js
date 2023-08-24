@@ -1,4 +1,4 @@
-class cmdController {
+class manager {
   list(name, message, items) {
     return [
       {
@@ -40,4 +40,4 @@ class cmdController {
   }
 }
 
-module.exports = new cmdController();
+module.exports = new manager();
