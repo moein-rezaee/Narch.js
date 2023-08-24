@@ -1,0 +1,33 @@
+{
+  "name": "narch",
+  "version": "1.0.0",
+  "description": "node framework with any architecture",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "narch-cli": "node .\\cmd\\index.js"
+  },
+  "bin": {
+    "narch": "index.js"
+  },
+  "keywords": [
+    "framework",
+    "node",
+    "node.js",
+    "architecture",
+    "backend"
+  ],
+  "author": "Moein Rezaee",
+  "license": "ISC",
+  "dependencies": {
+    "fs-manager": "file:../modules/fs-manager",
+    "inquirer": "^8.2.5",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.22.10",
+    "@babel/core": "^7.22.10",
+    "@babel/plugin-proposal-decorators": "^7.22.10",
+    "@babel/preset-env": "^7.22.10"
+  }
+}

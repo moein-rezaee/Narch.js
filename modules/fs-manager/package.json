@@ -1,0 +1,17 @@
+{
+  "name": "fs-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./index.js"
+  },
+  "keywords": [
+    "file",
+    "file manager",
+    "fs",
+    "fs manager"
+  ],
+  "author": "Moein Rezaee",
+  "license": "ISC"
+}

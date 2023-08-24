@@ -1,0 +1,25 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "first app for test nurch.js framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "framework",
+    "backend",
+    "sample",
+    "nurch",
+    "nurch.js",
+    "node",
+    "node.js",
+    "js"
+  ],
+  "author": "Moein Rezaee",
+  "license": "ISC",
+  "dependencies": {
+    "fs-manager": "file:../modules/fs-manager",
+    "narch": "file:../narch"
+  }
+}
