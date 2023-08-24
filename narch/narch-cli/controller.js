@@ -3,6 +3,10 @@ const filesConf = require("./configs/files.conf");
 const { CMD, KEY } = require("./constants");
 
 class controller extends cli {
+  constructor() {
+    super();
+  }
+
   empty() {
     this.create(CMD.CONTROLLER.EMPTY);
   }

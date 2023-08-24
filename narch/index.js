@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
 const http = require("http");
+const parser = require("./narch-cli/parser");
 
 const appCommands = {
   run,
 };
 
 parser.run(appCommands);
-
 
 function run() {
   const server = http.createServer((req, res) => {
