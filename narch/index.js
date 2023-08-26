@@ -1,14 +1,20 @@
 #!/usr/bin/env node
 
 const http = require("http");
+const Router = require("./src/router");
 const cli = require("narch-cli");
 
 const appCommands = {
   run,
 };
 
+// const DeafsultController = require("./dist/defaultController/index");
+// const defultController = new DeafsultController();
+
 function run() {
   const server = http.createServer((req, res) => {
+    const router = new Router(req);
+
     if (req.url == "/") {
       res.write("Narch.js is runed");
     }

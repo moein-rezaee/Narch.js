@@ -17,6 +17,10 @@ module.exports = class FsManager {
     return data
   }
 
+  readDir(path) {
+    return fs.readdirSync(path);
+  }
+
   append(path, content) {
     try {
       fs.appendFileSync(path, content, this.#encoding, this.checkException);

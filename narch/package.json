@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "narch-cli": "node .\\cmd\\index.js"
+    "narch": "node_modules\\.bin\\babel controllers --out-dir dist && narch run"
   },
   "bin": {
-    "narch": "index.js"
+    "narch": "index"
   },
   "keywords": [
     "framework",
@@ -20,7 +20,8 @@
   "author": "Moein Rezaee",
   "license": "ISC",
   "dependencies": {
-    "narch-cli": "file:../modules/narch-cli"
+    "narch-cli": "file:../modules/narch-cli",
+    "fs-manager": "file:../modules/fs-manager"
   },
   "devDependencies": {
     "@babel/cli": "^7.22.10",
