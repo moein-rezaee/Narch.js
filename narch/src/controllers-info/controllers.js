@@ -1,6 +1,7 @@
 const FsManager = require("fs-manager");
 const path = require("path");
 const CONTROLLER_PATH = "../dist";
+const Controller = require("./controller");
 
 module.exports = class Controllers {
   fs;
@@ -12,13 +13,17 @@ module.exports = class Controllers {
     this.fs = new FsManager();
   }
 
-  info() {
+  getNames() {
     const controllersPath = this.path();
-    const dires = this.fs.readDir(controllersPath);
-    const controllers = [];
-    dires.forEach((controllerName) => {
-      const info = this.controller(controllerName);
-      controllers.push(info);
+    return this.fs.readDir(controllersPath);
+  }
+
+  info() {
+    const names = this.getNames();
+    const controllers = {};
+    names.forEach((name) => {
+      const info = this.controller(name);
+      controllers[name] = info;
     });
     return controllers;
   }

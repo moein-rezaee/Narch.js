@@ -3,20 +3,20 @@ module.exports = class Args {
     return args.length == 1 && args[0] == "" ? null : args;
   }
 
-  toArrayFromString(args) {
+  getNamesFromString(args) {
     return args.trim().split(",");
   }
 
-  getString(method) {
+  getNamesToString(method) {
     const strMethod = method.toString();
     const startIndex = strMethod.indexOf("(") + 1;
     const endIndex = strMethod.indexOf(")");
     return strMethod.slice(startIndex, endIndex);
   }
 
-  toArray(method) {
-    const strArgs = this.getString(method);
-    const args = this.toArrayFromString(strArgs);
-    return this.clean(args);
+  getNames(method) {
+    const strNames = this.getNamesToString(method);
+    const names = this.getNamesFromString(strNames);
+    return this.clean(names);
   }
 }
