@@ -11,11 +11,16 @@ const {
 } = require("../../src/decorators/http-methods");
 
 // admin/blog
+// @Route("admin/blog")
+// admin/blog
 // @Route("admin/[controller=blog]")
+// admin/default
+// @Route("admin/[controller]")
+// default
+// @Route("[controller]")
 // blog
 // @Route("[controller=blog]")
-// blog
-let defaultController = (_dec = Route("blog"), _dec2 = Get(":specialId?"), _dec3 = Post("[controller]/details/:postId?"), _dec4 = Put(':id'), _dec5 = Delete(":specialId?"), _dec(_class = (_class2 = class defaultController {
+let defaultController = (_dec = Route("blogs"), _dec2 = Get(":specialId?"), _dec3 = Post("[controller]/details/:postId?"), _dec4 = Put(':id'), _dec5 = Delete(":specialId?"), _dec(_class = (_class2 = class defaultController {
   constructor() {}
 
   // getOne/12

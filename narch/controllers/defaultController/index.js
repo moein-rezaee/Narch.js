@@ -1,11 +1,16 @@
 const { Put, Post, Delete, Get, Route } = require("../../src/decorators/http-methods");
 
 // admin/blog
+// @Route("admin/blog")
+// admin/blog
 // @Route("admin/[controller=blog]")
+// admin/default
+// @Route("admin/[controller]")
+// default
+// @Route("[controller]")
 // blog
 // @Route("[controller=blog]")
-// blog
-@Route("blog")
+@Route("blogs")
 class defaultController {
   constructor() {}
   

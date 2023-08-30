@@ -3,7 +3,7 @@ const Args = require("./args");
 module.exports = class Method {
   args(instance) {
     const args = new Args();
-    return args.toArray(instance);
+    return args.getNames(instance);
   }
 
   instance(context, name) {

@@ -12,8 +12,8 @@ const appCommands = {
 // const defultController = new DeafsultController();
 
 function run() {
+  const router = new Router();
   const server = http.createServer((req, res) => {
-    const router = new Router(req);
 
     if (req.url == "/") {
       res.write("Narch.js is runed");

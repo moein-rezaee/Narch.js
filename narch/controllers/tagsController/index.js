@@ -1,7 +1,6 @@
-const { Put, Post, Delete, Route } = require("../../src/decorators/http-methods");
+const { Put, Post, Delete } = require("../../src/decorators/http-methods");
 
-@Route("[controller]/[action]")
-class postsController {
+module.exports = class tagsController {
   constructor() {}
 
   get(id) {
@@ -27,4 +26,3 @@ class postsController {
     return id;
   }
 };
-module.exports = postsController

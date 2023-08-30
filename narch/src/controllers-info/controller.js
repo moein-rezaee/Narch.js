@@ -1,5 +1,5 @@
 const Methods = require("./methods");
-const CONTROLLER_PATH = "../dist";
+const CONTROLLER_PATH = "../../dist";
 
 module.exports = class Controller {
   info(controllerName) {
@@ -19,7 +19,8 @@ module.exports = class Controller {
   }
 
   instance(controllerName) {
-    const Controller = this.path(controllerName);
+    const controllerPath = this.path(controllerName);
+    const Controller = require(controllerPath);
     return new Controller();
   }
 
