@@ -16,7 +16,6 @@ module.exports = class ActionUrlGenerator {
     const defaultUrl = this.default();
     const decoratedUrl = this.decorated();
     const pattern = this.pattern(decoratedUrl);
-    console.log(pattern);
     return {
       default: defaultUrl,
       decorated: decoratedUrl,

@@ -8,7 +8,7 @@ const {
   Delete,
   Get,
   Route
-} = require("../../src/decorators/httpMethods");
+} = require("../../src/decorators/http-methods");
 
 // admin/blog
 // @Route("admin/blog")
