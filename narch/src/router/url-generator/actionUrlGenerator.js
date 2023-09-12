@@ -1,5 +1,5 @@
-const UrlParser = require("../parser");
-const PatternMaker = require("./patternMaker");
+const UrlParser = require("../url-parser");
+const PatternMaker = require("../pattern-maker");
 module.exports = class ActionUrlGenerator {
   info;
   action;

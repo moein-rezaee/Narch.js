@@ -1,4 +1,4 @@
-const UrlParser = require("../parser");
+const UrlParser = require("../url-parser");
 
 module.exports = class ControllerUrlGenerator {
 
