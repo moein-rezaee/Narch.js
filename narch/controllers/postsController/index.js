@@ -1,4 +1,4 @@
-const { Put, Post, Delete, Route } = require("../../src/decorators/httpMethods");
+const { Put, Post, Delete, Route } = require("../../src/decorators/http-methods");
 
 @Route("[controller]/[action]")
 class postsController {
