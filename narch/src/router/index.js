@@ -3,6 +3,7 @@ const ControllerRouter = require("./controllerRouter");
 
 module.exports = class Router {
   router = [];
+  patterns = [];
   constructor() {
     this.generate();
   }
@@ -11,12 +12,17 @@ module.exports = class Router {
     const controllerRouter = new ControllerRouter();
     const actionRouter = new ActionRouter();
     controllerRouter.generate((controllerRoute) => {
-      this.add(controllerRoute);
-      actionRouter.generate(controllerRoute, (route) => this.add(route));
+      this.addController(controllerRoute);
+      actionRouter.generate(controllerRoute, (route) => this.addAction(route));
     });
   }
 
-  add(route) {
+  addController(route) {
     this.router.push(route);
+  }
+
+  addAction(route) {
+    this.router.push(route);
+    this.patterns.push(route.url.pattern);
   }
 };

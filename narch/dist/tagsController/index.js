@@ -9,18 +9,25 @@ const {
 } = require("../../src/decorators/httpMethods");
 module.exports = (_class = class tagsController {
   constructor() {}
+
+  // GET:tags/:id
   get(id) {
     return id;
   }
+
+  // GET:tags
   getAll() {
     return [];
   }
+  // POST:tags
   add(data) {
     return data;
   }
+  // PUT:tags
   edit(data) {
     return data;
   }
+  // DELETE:tags/:id
   delete(id) {
     return id;
   }

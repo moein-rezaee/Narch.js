@@ -10,18 +10,25 @@ const {
 } = require("../../src/decorators/httpMethods");
 let postsController = (_dec = Route("[controller]/[action]"), _dec(_class = (_class2 = class postsController {
   constructor() {}
+
+  // GET:posts/get/:id
   get(id) {
     return id;
   }
+
+  // GET:posts/getAll
   getAll() {
     return [];
   }
+  // POST:posts/add
   add(data) {
     return data;
   }
+  // PUT:posts/edit
   edit(data) {
     return data;
   }
+  // DELETE:posts/delete/:id
   delete(id) {
     return id;
   }

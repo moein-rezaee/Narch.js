@@ -16,6 +16,8 @@ const {
 // @Route("admin/[controller=blog]")
 // admin/default
 // @Route("admin/[controller]")
+// admin/default/[action]
+// @Route("admin/[controller]/[action]")
 // default
 // @Route("[controller]")
 // blog
@@ -23,43 +25,45 @@ const {
 let defaultController = (_dec = Route("blogs"), _dec2 = Get(":specialId?"), _dec3 = Post("[controller]/[action]/:postId?"), _dec4 = Put(':id'), _dec5 = Delete(":specialId?"), _dec(_class = (_class2 = class defaultController {
   constructor() {}
 
-  // getOne/12
+  // GET:getOne/12
   // @Get("getOne/:id")
 
-  // blogs/getOne/12
+  // GET:blogs/getOne/:id
   // @Get("[action=getOne]")
   // @Get("[action=getOne]/:id")
   // @Get("[controller]/[action=getOne]")
+  // @Get("[controller]/[action=getOne]/:id")
 
-  // post/getOne/12
+  // GET:post/getOne/:id
   // @Get("[controller=post]/[action=getOne]")
 
-  // blog/:id
+  // GET:blogs/:id
   // @Get(":id")
   get(id) {
     return id;
   }
 
-  // blog/getAll
+  // GET:blogs/getAll
   // @Get([action=getAll])
-  // blog
+
+  // GET:blogs
   // @Get
   // @Get([controller])
   getAll() {
     return [];
   }
 
-  // blog/comments/:postId
+  // GET:blogs/comments/:postId
   // @Get('[controller]/comments/:postId')
   // @Get('[controller]/comments')
 
-  // comments/:postId/:text
+  // GET:comments/:postId/:text
   // @Get('comments')
   // getComments(postId, text)
 
-  // specialId is param
-  // specialId is optional
-  // blog/:specialId?
+  // -- specialId is param
+  // -- specialId is optional
+  // GET:blogs/:specialId?
   specialGet(specialId) {
     return specialId;
   }
@@ -70,14 +74,14 @@ let defaultController = (_dec = Route("blogs"), _dec2 = Get(":specialId?"), _dec
     return data;
   }
 
-  // change url
-  // postId is param 
-  // postId is optional 
-  // data is body 
-  // blog/details Or blog/details/:postId
+  // -- change url
+  // -- postId is param 
+  // -- postId is optional 
+  // -- data is body 
+  // POST:blogs/details Or POST:blogs/details/:postId
   // @Post("[controller]/details/:postId?")
 
-  // blog/specialPost Or blog/specialPost/:postId
+  // POST:blogs/specialPost Or POST:blogs/specialPost/:postId
   specialPost(postId, data) {
     return [];
   }
@@ -88,23 +92,25 @@ let defaultController = (_dec = Route("blogs"), _dec2 = Get(":specialId?"), _dec
     return data;
   }
 
-  // blog/:id/:txt
+  // PUT:blogs/:id/:txt
   // @Put('[controller]/:id/:txt') 
   // specialPut(id, data, txt)
 
-  // id is param
-  // data is body
+  // -- id is param
+  // -- data is body
+  // PUT:blogs/:id
   specialPut(id, data) {
     return data;
   }
 
   // ==================================
 
+  // DELETE:blogs/:id
   delete(id) {
     return id;
   }
 
-  // blog/:specialId Or blog
+  // DELETE:blogs/:specialId Or DELETE:blogs
   specialDel(specialId) {
     return specialId;
   }

@@ -1,13 +1,14 @@
 const UrlParser = require("../parser");
+const PatternMaker = require("./patternMaker");
 module.exports = class ActionUrlGenerator {
   info;
-  controller;
+  action;
+  controllerRoute;
   decorator;
   constructor(info) {
-    // const {controllerRoute, action, decorator} = info;
     this.info = info;
+    this.action = info.action;
     this.controllerRoute = info.controllerRoute;
-    this.controller = info.controllerRoute.controller;
     this.decorator = info.decorator;
   }
 
@@ -15,6 +16,7 @@ module.exports = class ActionUrlGenerator {
     const defaultUrl = this.default();
     const decoratedUrl = this.decorated();
     const pattern = this.pattern(decoratedUrl);
+    console.log(pattern);
     return {
       default: defaultUrl,
       decorated: decoratedUrl,
@@ -23,52 +25,31 @@ module.exports = class ActionUrlGenerator {
   }
 
   default() {
-    return `/${this.controller.name}/${this.info.action.name}`;
+    return `/${this.action.name}`;
   }
-
-  // decorated() {
-  //   const { pattern } = this.controllerRoute.url;
-  //   const hasAction = this.hasAction(pattern);
-  //   if (this.decorator && !hasAction) {
-  //     return `${pattern}/${this.decorator.url}`;
-  //   } else if (this.decorator && hasAction) {
-  //     // delete [action]
-
-
-  //     // `${pattern}/${this.decorator.url}`
-  //   }
-  //   return null;
-  // }
-
-  // controllerPattern + actionName
-  // default() {
-  //   return `/${this.info.action.name}`;
-  // }
 
   decorated() {
     const hasDecoratedUrl = this.hasDecoratedUrl();
     return hasDecoratedUrl ? `/${this.decorator.url}` : null;
   }
 
-  hasDecoratedUrl(){
+  hasDecoratedUrl() {
     return this.decorator && this.decorator.url;
   }
 
-  // hasAction(pattern) {
-  //   return pattern.includes("[action]");
-  // }
-
-  // :*
-  // [action]
-  // [action=*]
-  // [controller]
-  // [controller=*]
-  // text
-  // controllerPattern
   pattern(decoratedUrl) {
-    // در این قسمت باید روت کامل رو باید تشکیل بشه
+    const parsedUrl = this.parsePattern(decoratedUrl);
+    return this.makePayttern(decoratedUrl, parsedUrl);
+  }
+
+  parsePattern(decoratedUrl) {
     const parser = this.getParser(decoratedUrl);
     return parser.parse();
+  }
+
+  makePayttern(decoratedUrl, parsedUrl) {
+    const patternMaker = new PatternMaker(this.info);
+    return patternMaker.make(decoratedUrl, parsedUrl);
   }
 
   getParser(decoratedUrl) {

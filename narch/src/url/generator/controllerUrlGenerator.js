@@ -14,11 +14,11 @@ module.exports = class ControllerUrlGenerator {
   }
 
   default(controller) {
-    return `/${controller.name}`;
+    return controller.name;
   }
 
   decorated(decorator) {
-    return decorator ? `/${decorator.url}` : null;
+    return decorator ? decorator.url : null;
   }
 
   pattern(decoratedUrl, decorator) {
