@@ -17,10 +17,10 @@ module.exports = {
         val: "[action=",
         func: "changeDefault",
       },
-      {
-        val: ":",
-        func: "setDaynamicParam",
-      },
+      // {
+      //   val: ":",
+      //   func: "setDaynamicParam",
+      // },
     ],
   },
   controller: {
@@ -33,10 +33,10 @@ module.exports = {
         val: "[controller]",
         func: "setDefault",
       },
-      {
-        val: "[action]",
-        func: "setAction",
-      },
+      // {
+      //   val: "[action]",
+      //   func: "setAction",
+      // },
     ],
   },
 };

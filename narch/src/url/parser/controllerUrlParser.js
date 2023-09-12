@@ -1,7 +1,7 @@
-const DecoratedUrlParser = require("./decoratedUrlParser");
-const { controller } = require("./url-parser.config");
+const BaseUrlParser = require("./baseUrlParser");
+const { controller } = require("./config");
 
-module.exports = class ControllerUrlParser extends DecoratedUrlParser {
+module.exports = class ControllerUrlParser extends BaseUrlParser {
   decorator;
   constructor(decoratedUrl, decorator) {
     super(decoratedUrl, controller.formats);
@@ -36,5 +36,5 @@ module.exports = class ControllerUrlParser extends DecoratedUrlParser {
 
   // [action]
   // نام اکشن باید در تک تک روت های کنترلر اعمال شود
-  setAction() {}
+  // setAction() {}
 };

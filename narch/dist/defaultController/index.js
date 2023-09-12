@@ -8,7 +8,7 @@ const {
   Delete,
   Get,
   Route
-} = require("../../src/decorators/http-methods");
+} = require("../../src/decorators/httpMethods");
 
 // admin/blog
 // @Route("admin/blog")
@@ -20,13 +20,13 @@ const {
 // @Route("[controller]")
 // blog
 // @Route("[controller=blog]")
-let defaultController = (_dec = Route("blogs"), _dec2 = Get(":specialId?"), _dec3 = Post("[controller]/details/:postId?"), _dec4 = Put(':id'), _dec5 = Delete(":specialId?"), _dec(_class = (_class2 = class defaultController {
+let defaultController = (_dec = Route("blogs"), _dec2 = Get(":specialId?"), _dec3 = Post("[controller]/[action]/:postId?"), _dec4 = Put(':id'), _dec5 = Delete(":specialId?"), _dec(_class = (_class2 = class defaultController {
   constructor() {}
 
   // getOne/12
   // @Get("getOne/:id")
 
-  // blog/getOne/12
+  // blogs/getOne/12
   // @Get("[action=getOne]")
   // @Get("[action=getOne]/:id")
   // @Get("[controller]/[action=getOne]")
@@ -71,10 +71,13 @@ let defaultController = (_dec = Route("blogs"), _dec2 = Get(":specialId?"), _dec
   }
 
   // change url
-  // post id is param 
-  // post id is optional 
+  // postId is param 
+  // postId is optional 
   // data is body 
-  // blog/details Or blog/details:postId
+  // blog/details Or blog/details/:postId
+  // @Post("[controller]/details/:postId?")
+
+  // blog/specialPost Or blog/specialPost/:postId
   specialPost(postId, data) {
     return [];
   }

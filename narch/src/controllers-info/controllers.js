@@ -7,6 +7,7 @@ module.exports = class Controllers {
   fs;
   constructor() {
     this.setFs();
+    return this.info();
   }
 
   setFs() {

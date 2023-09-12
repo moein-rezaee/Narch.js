@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const http = require("http");
-const Router = require("./src/router");
+const Router = require("./src/router/index");
 const cli = require("narch-cli");
 
 const appCommands = {

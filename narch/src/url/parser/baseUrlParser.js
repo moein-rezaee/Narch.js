@@ -1,5 +1,5 @@
 
-module.exports = class DecoratedUrlParser {
+module.exports = class BaseUrlParser {
     route;
     formats;
     constructor(decoratedUrl, formats) {
@@ -10,7 +10,7 @@ module.exports = class DecoratedUrlParser {
     run(context) {
       const items = this.getRouteItems();
       items.forEach((item) => this.execute(context, item));
-      return this.route.join("/");
+      return this.route?.join("/");
     }
   
     execute(context, item) {
@@ -24,7 +24,8 @@ module.exports = class DecoratedUrlParser {
     }
   
     getRouteItems() {
-      return this.route?.filter((i) => i.includes("[") || i.includes(":")) ?? [];
+      // return this.route?.filter((i) => i.includes("[") || i.includes(":")) ?? [];
+      return this.route?.filter((i) => i.includes("[")) ?? [];
     }
 
     getValidRoute(decoratedUrl) {

@@ -1,4 +1,4 @@
-const { Put, Post, Delete } = require("../../src/decorators/http-methods");
+const { Put, Post, Delete } = require("../../src/decorators/httpMethods");
 
 module.exports = class tagsController {
   constructor() {}

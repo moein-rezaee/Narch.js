@@ -7,7 +7,7 @@ const {
   Post,
   Delete,
   Route
-} = require("../../src/decorators/http-methods");
+} = require("../../src/decorators/httpMethods");
 let postsController = (_dec = Route("[controller]/[action]"), _dec(_class = (_class2 = class postsController {
   constructor() {}
   get(id) {

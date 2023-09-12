@@ -16,6 +16,7 @@ module.exports = class Method {
     return {
       instance,
       args,
+      name
     };
   }
 }
