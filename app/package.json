@@ -19,7 +19,6 @@
   "author": "Moein Rezaee",
   "license": "ISC",
   "dependencies": {
-    "fs-manager": "file:../modules/fs-manager",
     "narch": "file:../narch"
   }
 }

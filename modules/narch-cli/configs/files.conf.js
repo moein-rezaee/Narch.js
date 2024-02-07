@@ -27,7 +27,7 @@ module.exports = {
         }
     
         @Delete
-        edit(id) {
+        delete(id) {
             return id;
         }
     }`,
