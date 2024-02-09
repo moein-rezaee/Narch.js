@@ -2,11 +2,14 @@
   "name": "narch",
   "version": "1.0.0",
   "description": "node framework with any architecture",
-  "main": "index.js",
+  "main": "src/index.ts",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "narch": "tsc && narch run"
+    "narch": "tsc && narch run",
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node --esm src/index.ts"
   },
   "bin": {
     "narch": "index"
@@ -26,6 +29,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.11.17",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }
 }
