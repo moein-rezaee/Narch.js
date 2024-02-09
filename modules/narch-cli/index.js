@@ -50,4 +50,4 @@ class cliNarch extends cli {
   }
 }
 
-module.exports = new cliNarch();
+export default new cliNarch();

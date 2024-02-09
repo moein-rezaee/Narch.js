@@ -1,7 +1,7 @@
 const Router = require("./router/index");
 const PatternMatcher = require("./router/pattern-handler/patternMatcher");
 
-module.exports = class Endpoint {
+class Endpoint {
   patternMatcher;
   matchPattern;
   constructor(url, method) {
@@ -47,3 +47,5 @@ module.exports = class Endpoint {
     return dynamic.reqUrlPart;
   }
 }
+
+export default Endpoint;

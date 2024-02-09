@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 
-const http = require("http");
-const cli = require("narch-cli");
-const Endpoint = require("./src/endpoint");
+import http from "http";
+import Endpoint from "./endpoint.js";
 
+const cli: any = require("narch-cli");
 const appCommands = {
   run,
 };
 
-function run() {
-  const server = http.createServer((req, res) => {
+function run(): void {
+  const server = http.createServer((req: any, res: any) => {
     try {
       res.writeHead(200, {'Content-Type': 'text/plain'});
       if (req.url == "/") {

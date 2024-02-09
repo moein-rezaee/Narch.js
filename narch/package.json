@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "node framework with any architecture",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "narch": "node_modules\\.bin\\babel controllers --out-dir dist && narch run"
+    "narch": "node_modules\\.bin\\babel controllers --out-dir dist && tsc && narch run"
   },
   "bin": {
     "narch": "index"
@@ -20,13 +21,15 @@
   "author": "Moein Rezaee",
   "license": "ISC",
   "dependencies": {
-    "narch-cli": "file:../modules/narch-cli",
-    "fs-manager": "file:../modules/fs-manager"
+    "fs-manager": "file:../modules/fs-manager",
+    "narch-cli": "file:../modules/narch-cli"
   },
   "devDependencies": {
     "@babel/cli": "^7.22.10",
     "@babel/core": "^7.22.10",
     "@babel/plugin-proposal-decorators": "^7.22.10",
-    "@babel/preset-env": "^7.22.10"
+    "@babel/preset-env": "^7.22.10",
+    "@types/node": "^20.11.17",
+    "typescript": "^5.3.3"
   }
 }
