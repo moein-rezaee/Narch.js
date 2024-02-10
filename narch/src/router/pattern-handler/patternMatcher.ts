@@ -1,37 +1,7 @@
+import { IPatternMatcher, IRouter } from "../../interfaces";
+import { MatchedDetail, MatchedPattern, Pattern, PatternInfo } from "../../types";
+
 const Router = require("../index");
-
-// Types
-type PatternInfo = {
-  patternIndex: number,
-  equals: Array<MatchedDetail>,
-  dynamics: Array<MatchedDetail>,
-  notEquals: Array<MatchedDetail>,
-  isMatch: boolean,
-  isFullMatch: boolean,
-}
-
-export type MatchedDetail = {
-  patternItemIndex: number,
-  reqUrlPart: string,
-  patternItem: string
-};
-
-// DTOs
-export type MatchedPattern = {
-  details: PatternInfo,
-  value: string
-}
-
-type Pattern = {
-  method: string,
-  parts: Array<string>,
-  value: string
-};
-
-// Interface
-export type IPatternMatcher = {
-  findeMatchPattern(): MatchedPattern,
-};
 
 class PatternMatcher implements IPatternMatcher {
   private readonly url: Pattern;
@@ -126,17 +96,16 @@ class PatternMatcher implements IPatternMatcher {
   }
 
   private limitPatterns() {
-    const router = new Router();
-    const patterns: Array<Pattern> = router.patterns;
+    const { patterns } = new Router() as IRouter;
     const method: string = this.url.method;
     const urlPartsCount: number = this.url.parts.length;
-    
+
     this.limitedPatterns = patterns.filter(
       (i: Pattern) => i.method == method && i.parts.length == urlPartsCount
     );
   }
 
-  private  create(patternIndex: number): PatternInfo {
+  private create(patternIndex: number): PatternInfo {
     const patternInfo: PatternInfo = {
       patternIndex,
       equals: [],
@@ -191,4 +160,4 @@ class PatternMatcher implements IPatternMatcher {
   }
 };
 
-export default PatternMatcher
+export default PatternMatcher;

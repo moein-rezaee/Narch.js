@@ -1,6 +1,7 @@
-const { Put, Post, Delete } = require("../../../narch/src/decorators/http-methods");
+import Narch from 'narch';
+const { Put, Post, Delete, Get, Route } = Narch.Decorators.RouterMethods;
 
-module.exports = class tagsController {
+export default class tagsController {
   constructor() {}
 
   // GET:tags/:id
@@ -13,19 +14,19 @@ module.exports = class tagsController {
     return [];
   }
 
-  @Post
+  @Post()
   // POST:tags
   add(data) {
     return data;
   }
 
-  @Put
+  @Put()
   // PUT:tags
   edit(data) {
     return data;
   }
 
-  @Delete
+  @Delete()
   // DELETE:tags/:id
   delete(id) {
     return id;

@@ -1,7 +1,8 @@
-const { Put, Post, Delete, Route } = require("../../src/decorators/http-methods");
+import Narch from 'narch';
+const { Put, Post, Delete, Get, Route } = Narch.Decorators.RouterMethods;
 
 @Route("[controller]/[action]")
-class postsController {
+export default class postsController {
   constructor() {}
 
   // GET:posts/get/:id
@@ -14,22 +15,21 @@ class postsController {
     return [];
   }
 
-  @Post
+  @Post()
   // POST:posts/add
   add(data) {
     return data;
   }
 
-  @Put
+  @Put()
   // PUT:posts/edit
   edit(data) {
     return data;
   }
 
-  @Delete
+  @Delete()
   // DELETE:posts/delete/:id
   delete(id) {
     return id;
   }
 };
-module.exports = postsController

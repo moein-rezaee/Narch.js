@@ -9,7 +9,8 @@
     "narch": "tsc && narch run",
     "build": "npx tsc",
     "start": "node dist/index.js",
-    "dev": "ts-node --esm src/index.ts"
+    "dev": "ts-node --esm src/index.ts",
+    "dev-decorators": "ts-node --esm src/controllers/homeController/index.ts"
   },
   "bin": {
     "narch": "index"

@@ -1,11 +1,7 @@
-import { MatchedDetail, MatchedPattern, IPatternMatcher } from "./router/pattern-handler/patternMatcher.js";
-
-const Router = require("./router/index");
-const PatternMatcher = require("./router/pattern-handler/patternMatcher");
-
-interface IEndpoint {
-  execute(): any
-}
+import { IEndpoint, IPatternMatcher, IRouter } from "./interfaces.js";
+import Router from "./router/index.js";
+import PatternMatcher from "./router/pattern-handler/patternMatcher.js";
+import { MatchedDetail, MatchedPattern } from "./types.js";
 
 class Endpoint implements IEndpoint {
   private patternMatcher: IPatternMatcher;
@@ -23,7 +19,7 @@ class Endpoint implements IEndpoint {
   }
 
   private findAllMatches() {
-    const { actions } = new Router();
+    const { actions } = new Router() as IRouter;
     return actions.filter((i: any) => i.url.pattern == this.matchPattern.value);
   }
 
