@@ -5,7 +5,7 @@ export default class tagsController {
   constructor() {}
 
   // GET:tags/:id
-  get(id) {
+  get(id: string): string {
     return id;
   }
 
@@ -16,19 +16,21 @@ export default class tagsController {
 
   @Post()
   // POST:tags
-  add(data) {
+  add(data: any): any {
     return data;
   }
 
   @Put()
   // PUT:tags
-  edit(data) {
+  edit(data: any): any {
     return data;
   }
 
   @Delete()
   // DELETE:tags/:id
-  delete(id) {
+  delete(id: string): string {
     return id;
   }
 };
+
+module.exports = tagsController;

@@ -1,6 +1,6 @@
 const Controllers = require("../controllers-info/controllers");
 const ControllerUrlGenerator = require("./url-generator/controllerUrlGenerator");
-const HttpMethods = require("../decorators/http-methods");
+const { HttpMethods } = require("../decorators/http-methods");
 
 module.exports = class ControllerRouter {
   generate(func) {
@@ -34,7 +34,9 @@ module.exports = class ControllerRouter {
   }
 
   decorator(name) {
-    return HttpMethods.Decorators?.find((i) => this.hasDecorator(i, name)) ?? null;
+    return (
+      HttpMethods.Decorators?.find((i) => this.hasDecorator(i, name)) ?? null
+    );
   }
 
   hasDecorator(i, name) {

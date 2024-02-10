@@ -31,7 +31,7 @@ export default class Router implements IRouter {
   }
 
   public get patterns(): Array<Pattern> {
-    return this.list.controllers;
+    return this.list.patterns;
   }
 
   private generate() {

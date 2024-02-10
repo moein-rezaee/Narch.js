@@ -6,6 +6,7 @@ import { RouterMethods } from './decorators/http-methods/index.js';
 import { IDecorators } from "./interfaces.js";
 import * as Types from "./types.js";
 import * as Interfaces from "./interfaces.js";
+import AppConfig from "./appConfig.js";
 
 // import NarchCLI from "narch-cli";
 // const appCommands = {
@@ -14,7 +15,8 @@ import * as Interfaces from "./interfaces.js";
 // const cli = new NarchCLI()
 // cli.run(appCommands);
 
-function run(): void {
+function run(config: any): void {
+  AppConfig.Set(config);
   const server = http.createServer((req: any, res: any) => {
     try {
       res.writeHead(200, { 'Content-Type': 'text/plain' });
@@ -27,7 +29,7 @@ function run(): void {
         res.end(JSON.stringify(result));
       }
     } catch (error) {
-      res.writeHead(500, { 'Content-Type': 'text/plain' });;
+      // res.writeHead(500, { 'Content-Type': 'text/plain' });;
       res.end(JSON.stringify(error));
     }
   });
@@ -35,8 +37,8 @@ function run(): void {
   console.log("Narch server started on: http://localhost:3000");
 }
 
-run();
 export default abstract class Narch {
+  public static Run: Function = (config: any) => run(config);
   public static Types: any = Types;
   public static Interfaces: any = Interfaces;
   public static Decorators: IDecorators = {

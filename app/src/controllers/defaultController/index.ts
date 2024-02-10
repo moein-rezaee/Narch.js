@@ -14,8 +14,8 @@ const { Put, Post, Delete, Get, Route } = Narch.Decorators.RouterMethods;
 // blog
 // @Route("[controller=blog]")
 @Route("blogs")
-export default class defaultController {
-  constructor() {}
+class defaultController {
+  constructor() { }
 
   // GET:getOne/12
   // @Get("getOne/:id")
@@ -31,7 +31,7 @@ export default class defaultController {
 
   // GET:blogs/:id
   // @Get(":id")
-  get(id) {
+  get(id: string): string {
     return id;
   }
 
@@ -41,7 +41,7 @@ export default class defaultController {
   // GET:blogs
   // @Get
   @Get('[controller]/[action]')
-  getAll() {
+  getAll(): Array<any> {
     return [];
   }
 
@@ -64,7 +64,7 @@ export default class defaultController {
   // ==================================
 
   @Post()
-  add(data)  {
+  add(data: any): any {
     return data;
   }
 
@@ -84,7 +84,7 @@ export default class defaultController {
   // ==================================
 
   @Put()
-  edit(data) {
+  edit(data: any): any {
     return data;
   }
 
@@ -104,7 +104,7 @@ export default class defaultController {
 
   @Delete()
   // DELETE:blogs/:id
-  delete(id) {
+  delete(id: string): string {
     return id;
   }
 
@@ -114,3 +114,5 @@ export default class defaultController {
   //   return specialId;
   // }
 };
+
+module.exports = defaultController;

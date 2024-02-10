@@ -1,7 +1,7 @@
 const ControllerUrlParser = require("./controllerUrlParser");
 const ActionUrlParser = require("./actionUrlParser");
 
-export default class UrlParser {
+module.exports = class UrlParser {
   info;
   constructor(info) {
     this.info = info;
