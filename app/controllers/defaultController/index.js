@@ -1,4 +1,4 @@
-const { Put, Post, Delete, Get, Route } = require("../../src/decorators/http-methods");
+const { Put, Post, Delete, Get, Route } = require("../../../narch/src/decorators/http-methods/index");
 
 // admin/blog
 // @Route("admin/blog")
