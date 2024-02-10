@@ -7,15 +7,17 @@ import { IDecorators } from "./interfaces.js";
 import * as Types from "./types.js";
 import * as Interfaces from "./interfaces.js";
 
-const cli: any = require("narch-cli");
-const appCommands = {
-  run,
-};
+// import NarchCLI from "narch-cli";
+// const appCommands = {
+//   run,
+// };
+// const cli = new NarchCLI()
+// cli.run(appCommands);
 
 function run(): void {
   const server = http.createServer((req: any, res: any) => {
     try {
-      res.writeHead(200, {'Content-Type': 'text/plain'});
+      res.writeHead(200, { 'Content-Type': 'text/plain' });
       if (req.url == "/") {
         res.end("Narch.js is runed");
       } else {
@@ -25,20 +27,18 @@ function run(): void {
         res.end(JSON.stringify(result));
       }
     } catch (error) {
-      res.writeHead(500, {'Content-Type': 'text/plain'});;
+      res.writeHead(500, { 'Content-Type': 'text/plain' });;
       res.end(JSON.stringify(error));
-    } 
+    }
   });
   server.listen(3000);
   console.log("Narch server started on: http://localhost:3000");
 }
 
-cli.run(appCommands);
-
-
+run();
 export default abstract class Narch {
-  public static Types: any = Types; 
-  public static Interfaces: any = Interfaces; 
+  public static Types: any = Types;
+  public static Interfaces: any = Interfaces;
   public static Decorators: IDecorators = {
     RouterMethods
   };

@@ -67,4 +67,4 @@ export default class Router implements IRouter {
       value: pattern
     } as Pattern;
   }
-};
+}

@@ -10,6 +10,8 @@
     "build": "npx tsc",
     "start": "node dist/index.js",
     "dev": "ts-node --esm src/index.ts",
+    "tsx": "npx tsx src/index.ts",
+    "nodemon": "nodemon src/index.ts",
     "dev-decorators": "ts-node --esm src/controllers/homeController/index.ts"
   },
   "bin": {
@@ -30,7 +32,9 @@
   },
   "devDependencies": {
     "@types/node": "^20.11.17",
+    "nodemon": "^3.0.3",
     "ts-node": "^10.9.2",
+    "tsx": "^4.7.1",
     "typescript": "^5.3.3"
   }
 }

@@ -1,9 +1,9 @@
 import { IPatternMatcher, IRouter } from "../../interfaces";
 import { MatchedDetail, MatchedPattern, Pattern, PatternInfo } from "../../types";
 
-const Router = require("../index");
+import Router from "../index";
 
-class PatternMatcher implements IPatternMatcher {
+module.exports = class PatternMatcher implements IPatternMatcher {
   private readonly url: Pattern;
   private patternInfo: PatternInfo[] = [];
   private limitedPatterns: Pattern[] = [];
@@ -159,5 +159,3 @@ class PatternMatcher implements IPatternMatcher {
     } as MatchedDetail;
   }
 };
-
-export default PatternMatcher;

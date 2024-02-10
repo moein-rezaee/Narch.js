@@ -1,7 +1,8 @@
 import { IEndpoint, IPatternMatcher, IRouter } from "./interfaces.js";
-import Router from "./router/index.js";
-import PatternMatcher from "./router/pattern-handler/patternMatcher.js";
 import { MatchedDetail, MatchedPattern } from "./types.js";
+import Router from "./router/index.js";
+import PatternMatcher from "./router/pattern-handler/patternMatcher";
+
 
 class Endpoint implements IEndpoint {
   private patternMatcher: IPatternMatcher;
