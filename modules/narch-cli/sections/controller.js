@@ -27,10 +27,10 @@ class controller extends cli {
   getInfo(name) {
     const basePath = "./controllers";
     const controllerName = `${name}Controller`;
-    const controllerPath = `${basePath}/${controllerName}`;
+    const controllerPath = `src/${basePath}/${controllerName}`;
     return {
       path: controllerPath,
-      name: `${controllerPath}/index.js`,
+      name: `${controllerPath}/index.ts`,
     };
   }
 }

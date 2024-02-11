@@ -1,7 +1,7 @@
 import { Decorator } from "../../types.js";
 import ContextManager from "./contextManager.js";
 
- abstract class HttpMethods {
+abstract class HttpMethods {
   static Decorators: Array<Decorator> = [];
 
   static Add(decorator: Decorator): void {
@@ -9,7 +9,7 @@ import ContextManager from "./contextManager.js";
   }
 }
 
-abstract class RouterMethods {
+export abstract class RouterMethods {
   static Route(pattern: string): Function {
     return function (context: Function): void {
       const decorator: Decorator = {
@@ -71,7 +71,7 @@ abstract class RouterMethods {
   }
 }
 
-module.exports = {
+export default {
   HttpMethods,
   RouterMethods
 }

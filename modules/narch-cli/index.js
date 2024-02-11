@@ -22,7 +22,7 @@ class NarchCli extends CLI {
       });
     } else {
       const list = this.getCommands();
-      const command = this.getFirst(list) ?? 'run';
+      const command = this.getFirst(list);
       if (command) appCommands[command]();
     }
   }

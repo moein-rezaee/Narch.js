@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 
 import http from "http";
 import Endpoint from "./endpoint.js";
@@ -7,13 +6,6 @@ import { IDecorators } from "./interfaces.js";
 import * as Types from "./types.js";
 import * as Interfaces from "./interfaces.js";
 import AppConfig from "./appConfig.js";
-
-// import NarchCLI from "narch-cli";
-// const appCommands = {
-//   run,
-// };
-// const cli = new NarchCLI()
-// cli.run(appCommands);
 
 function run(config: any): void {
   AppConfig.Set(config);

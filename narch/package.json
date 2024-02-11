@@ -15,7 +15,7 @@
     "dev-decorators": "ts-node --esm src/controllers/homeController/index.ts"
   },
   "bin": {
-    "narch": "index"
+    "narch": "index.js"
   },
   "keywords": [
     "framework",
