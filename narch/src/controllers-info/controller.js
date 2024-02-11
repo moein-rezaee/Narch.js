@@ -1,5 +1,7 @@
 const Methods = require("./methods");
-const CONTROLLER_PATH = "../../dist";
+const AppConfig = require('../appConfig');
+const CONTROLLER_PATH = "../dist/controllers";
+const path = require("path");
 
 module.exports = class Controller {
   info(controllerName) {
@@ -25,7 +27,8 @@ module.exports = class Controller {
   }
 
   path(controllerName) {
-    return `${CONTROLLER_PATH}/${controllerName}/index.js`;
+    const config = AppConfig.Get();
+    return path.join(config.appRoot, `/${CONTROLLER_PATH}/${controllerName}/index.js`);
   }
 
   methods(instance) {

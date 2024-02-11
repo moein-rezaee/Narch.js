@@ -3,7 +3,7 @@ const conf = require("./configs/cmd.conf");
 const filesConf = require("./configs/files.conf");
 const FsManager = require("fs-manager");
 
-module.exports = class cli {
+module.exports = class CLI {
   constructor() {
     this.fs = new FsManager();
   }

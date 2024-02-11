@@ -1,6 +1,6 @@
-const cli = require("./cli");
+const CLI = require("./cli");
 
-class cliNarch extends cli {
+class NarchCli extends CLI {
   argv;
   constructor() {
     super();
@@ -23,7 +23,7 @@ class cliNarch extends cli {
     } else {
       const list = this.getCommands();
       const command = this.getFirst(list);
-      appCommands[command]();
+      if (command) appCommands[command]();
     }
   }
 
@@ -50,4 +50,4 @@ class cliNarch extends cli {
   }
 }
 
-module.exports = new cliNarch();
+module.exports = NarchCli;

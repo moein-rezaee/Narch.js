@@ -1,35 +1,37 @@
 module.exports = {
   controller: {
-    empty: (name) => `module.exports = class ${name}Controller {
+    empty: (name) => `import Narch from 'narch';
+    const { Put, Post, Delete, Get, Route } = Narch.Decorators.RouterMethods;
+    module.exports = class ${name}Controller {
         constructor() {
         }
     }`,
-    restful: (name) => `module.exports = class ${name}Controller {
-        constructor() {
-        }
+    restful: (name) => `
+    import Narch from 'narch';
+    const { Put, Post, Delete, Get, Route } = Narch.Decorators.RouterMethods;
+    module.exports = class ${name}Controller {
+      get(id: string): string {
+        return id;
+      }
+      
+      getAll(): Array<any> {
+        return [];
+      }
     
-        get(id) {
-            return id;
-        }
+      @Post()
+      add(data: any): any {
+        return data;
+      }
     
-        getAll() {
-            return []
-        }
+      @Put()
+      edit(data: any): any {
+        return data;
+      }
     
-        @Post
-        add(data) {
-            return data;
-        }
-    
-        @Put
-        edit(data) {
-            return data;
-        }
-    
-        @Delete
-        delete(id) {
-            return id;
-        }
-    }`,
+      @Delete()
+      delete(id: string): string {
+        return id;
+      }
+    };`,
   },
 };

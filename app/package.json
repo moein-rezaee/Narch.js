@@ -2,10 +2,15 @@
   "name": "app",
   "version": "1.0.0",
   "description": "first app for test nurch.js framework",
-  "main": "index.js",
+  "main": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "narch": "node_modules\\.bin\\babel controllers --out-dir dist && narch run"
+    "narch": "node_modules\\.bin\\babel controllers --out-dir dist && narch run",
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node --esm src/index.ts",
+    "tsx": "npx tsx src/index.ts",
+    "nodemon": "nodemon src/index.ts"
   },
   "keywords": [
     "framework",
@@ -23,9 +28,10 @@
     "narch": "file:../narch"
   },
   "devDependencies": {
-    "@babel/cli": "^7.22.10",
-    "@babel/core": "^7.22.10",
-    "@babel/plugin-proposal-decorators": "^7.22.10",
-    "@babel/preset-env": "^7.22.10"
+    "@types/node": "^20.11.17",
+    "nodemon": "^3.0.3",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.7.1",
+    "typescript": "^5.3.3"
   }
 }

@@ -1,10 +1,16 @@
-module.exports = class ContextManager {
-  context;
-  constructor(context) {
+import { ContextInfo } from "../../types.js";
+export default class ContextManager {
+  context: any;
+  constructor(context: any) {
     this.context = context;
   }
 
-  info() {
+  static GetInfo(context: any): ContextInfo {
+    const contextManager = new ContextManager(context);
+    return contextManager.info();
+  }
+
+  info(): ContextInfo {
     const type = this.type();
     const fileName = this.fileName(type);
     const name = this.name(fileName);
@@ -13,19 +19,19 @@ module.exports = class ContextManager {
       fileName,
       type,
       instance: this.context,
-    };
+    } as ContextInfo;
   }
 
-  type() {
+  private type(): string {
     const contextType = typeof this.context;
     return contextType == "function" ? "class" : "instanceOfClass";
   }
 
-  name(fileName) {
+  private name(fileName: string): string {
     return fileName.split("Controller")[0];
   }
 
-  fileName(type) {
+  private fileName(type: string): string {
     const isClass = type == "class";
     if (isClass) {
       return this.context.name;

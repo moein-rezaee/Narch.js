@@ -1,4 +1,5 @@
-const { Put, Post, Delete, Get, Route } = require("../../../narch/src/decorators/http-methods/index");
+import Narch from 'narch';
+const { Put, Post, Delete, Get, Route } = Narch.Decorators.RouterMethods;
 
 // admin/blog
 // @Route("admin/blog")
@@ -14,7 +15,7 @@ const { Put, Post, Delete, Get, Route } = require("../../../narch/src/decorators
 // @Route("[controller=blog]")
 @Route("blogs")
 class defaultController {
-  constructor() {}
+  constructor() { }
 
   // GET:getOne/12
   // @Get("getOne/:id")
@@ -30,7 +31,7 @@ class defaultController {
 
   // GET:blogs/:id
   // @Get(":id")
-  get(id) {
+  get(id: string): string {
     return id;
   }
 
@@ -40,7 +41,7 @@ class defaultController {
   // GET:blogs
   // @Get
   @Get('[controller]/[action]')
-  getAll() {
+  getAll(): Array<any> {
     return [];
   }
 
@@ -62,8 +63,8 @@ class defaultController {
 
   // ==================================
 
-  @Post
-  add(data)  {
+  @Post()
+  add(data: any): any {
     return data;
   }
 
@@ -82,8 +83,8 @@ class defaultController {
 
   // ==================================
 
-  @Put
-  edit(data) {
+  @Put()
+  edit(data: any): any {
     return data;
   }
 
@@ -101,9 +102,9 @@ class defaultController {
 
   // ==================================
 
-  @Delete
+  @Delete()
   // DELETE:blogs/:id
-  delete(id) {
+  delete(id: string): string {
     return id;
   }
 

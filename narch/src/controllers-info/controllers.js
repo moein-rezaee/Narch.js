@@ -1,7 +1,8 @@
 const FsManager = require("fs-manager");
 const path = require("path");
 const Controller = require("./controller");
-const CONTROLLER_PATH = "../../dist";
+const CONTROLLER_PATH = "../dist/controllers";
+const AppConfig = require('../appConfig');
 
 module.exports = class Controllers {
   fs;
@@ -16,6 +17,7 @@ module.exports = class Controllers {
 
   getNames() {
     const controllersPath = this.path();
+    //TODO: اگر کنترلر وجود نداشت خطا نده یا خطای کنترل شده بده
     return this.fs.readDir(controllersPath);
   }
 
@@ -30,7 +32,8 @@ module.exports = class Controllers {
   }
 
   path() {
-    return path.join(__dirname, CONTROLLER_PATH);
+    const config = AppConfig.Get();
+    return path.join(config.appRoot, CONTROLLER_PATH);
   }
 
   controller(controllerName) {
