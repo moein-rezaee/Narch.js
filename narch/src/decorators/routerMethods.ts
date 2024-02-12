@@ -1,15 +1,8 @@
-import { Decorator } from "../../types.js";
-import ContextManager from "./contextManager.js";
+import ContextManager from "../router/contextManager.js";
+import { Decorator } from "../types.js";
+import HttpMethods from "./httpMethods.js";
 
-abstract class HttpMethods {
-  static Decorators: Array<Decorator> = [];
-
-  static Add(decorator: Decorator): void {
-    HttpMethods.Decorators.push(decorator);
-  }
-}
-
-export abstract class RouterMethods {
+module.exports = class RouterMethods {
   static Route(pattern: string): Function {
     return function (context: Function): void {
       const decorator: Decorator = {
@@ -19,7 +12,7 @@ export abstract class RouterMethods {
         url: pattern,
       };
       HttpMethods.Add(decorator);
-    }
+    };
   }
 
   static Get(pattern: string = ""): Function {
@@ -69,9 +62,4 @@ export abstract class RouterMethods {
       HttpMethods.Add(decorator);
     };
   }
-}
-
-export default {
-  HttpMethods,
-  RouterMethods
 }

@@ -1,5 +1,5 @@
 const ActionUrlGenerator = require("./url-generator/actionUrlGenerator");
-const { HttpMethods } = require("../decorators/http-methods");
+const HttpMethods = require("../decorators/httpMethods");
 
 module.exports = class ActionRouter {
   generate(controllerRoute, func) {

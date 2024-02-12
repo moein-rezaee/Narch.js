@@ -1,5 +1,6 @@
-import Narch from 'narch';
-const { Put, Post, Delete, Get, Route } = Narch.Decorators.RouterMethods;
+import RouterMethods from 'narch/src/decorators/routerMethods';
+const { Put, Post, Delete, Get, Route } = RouterMethods;
+
 
 @Route("[controller]/[action]")
 export default class postsController {

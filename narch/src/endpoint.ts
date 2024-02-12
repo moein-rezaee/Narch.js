@@ -12,11 +12,14 @@ class Endpoint implements IEndpoint {
     this.matchPattern = this.patternMatcher.findeMatchPattern();
   }
 
-  public execute() {
+  public execute(data: any = null, files: any = null) {
     const endpoint = this.findMatchEndpoint();
     const values = this.getArgsValue(endpoint.action.args);
     //TODO: if parameter is number send number to user
-    return endpoint.action.instance.call(endpoint.context.instance, ...values);
+    if (data) {
+      return endpoint.action.instance.call(endpoint.context.instance, ...[data, files]);
+    } else
+      return endpoint.action.instance.call(endpoint.context.instance, ...values);
   }
 
   private findAllMatches() {

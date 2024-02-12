@@ -27,7 +27,7 @@
   "author": "Moein Rezaee",
   "license": "ISC",
   "dependencies": {
-    "app-root-path": "^3.1.0",
+    "busboy": "^1.6.0",
     "fs-manager": "file:../modules/fs-manager",
     "narch-cli": "file:../modules/narch-cli"
   },

@@ -1,5 +1,5 @@
-import Narch from 'narch';
-const { Put, Post, Delete, Get, Route } = Narch.Decorators.RouterMethods;
+import RouterMethods from 'narch/src/decorators/routerMethods';
+const { Put, Post, Delete, Get, Route } = RouterMethods;
 
 // admin/blog
 // @Route("admin/blog")
@@ -64,8 +64,8 @@ class defaultController {
   // ==================================
 
   @Post()
-  add(data: any): any {
-    return data;
+  add(data: any, files: any): any {
+    return { data, files };
   }
 
   // -- change url

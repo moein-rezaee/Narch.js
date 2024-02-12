@@ -1,6 +1,6 @@
 const Methods = require("./methods");
 const AppConfig = require('../appConfig');
-const CONTROLLER_PATH = "../dist/controllers";
+const CONTROLLER_PATH = "../src/controllers";
 const path = require("path");
 
 module.exports = class Controller {
@@ -28,7 +28,7 @@ module.exports = class Controller {
 
   path(controllerName) {
     const config = AppConfig.Get();
-    return path.join(config.appRoot, `/${CONTROLLER_PATH}/${controllerName}/index.js`);
+    return path.join(config.appRoot, `/${CONTROLLER_PATH}/${controllerName}/index.ts`);
   }
 
   methods(instance) {
