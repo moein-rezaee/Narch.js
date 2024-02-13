@@ -1,8 +1,8 @@
 import ContextManager from "../router/contextManager.js";
 import { Decorator } from "../types.js";
-import HttpMethods from "./httpMethods.js";
+import { HttpMethods } from "./httpMethods.js";
 
-module.exports = class RouterMethods {
+export class RouterMethods {
   static Route(pattern: string): Function {
     return function (context: Function): void {
       const decorator: Decorator = {

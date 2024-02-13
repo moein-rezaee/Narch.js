@@ -1,6 +1,6 @@
 const Controllers = require("../controllers-info/controllers");
 const ControllerUrlGenerator = require("./url-generator/controllerUrlGenerator");
-const HttpMethods = require("../decorators/httpMethods");
+const { HttpMethods } = require("../decorators/httpMethods");
 
 module.exports = class ControllerRouter {
   generate(func) {

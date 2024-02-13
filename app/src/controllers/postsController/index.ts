@@ -1,10 +1,10 @@
-import RouterMethods from 'narch/src/decorators/routerMethods';
+import { RouterMethods } from 'narch/src/decorators/routerMethods';
 const { Put, Post, Delete, Get, Route } = RouterMethods;
 
 
 @Route("[controller]/[action]")
 export default class postsController {
-  constructor() {}
+  constructor() { }
 
   // GET:posts/get/:id
   get(id: string): string {
@@ -24,7 +24,7 @@ export default class postsController {
 
   @Put()
   // PUT:posts/edit
-  edit(data:any):any {
+  edit(data: any): any {
     return data;
   }
 

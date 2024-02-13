@@ -1,6 +1,6 @@
 import { Decorator } from "../types.js";
 
-module.exports = class HttpMethods {
+export class HttpMethods {
   static Decorators: Array<Decorator> = [];
 
   static Add(decorator: Decorator): void {

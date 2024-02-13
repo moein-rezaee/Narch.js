@@ -1,4 +1,4 @@
-import RouterMethods from 'narch/src/decorators/routerMethods';
+import { RouterMethods } from 'narch/src/decorators/routerMethods';
 const { Put, Post, Delete, Get, Route } = RouterMethods;
 
 // admin/blog

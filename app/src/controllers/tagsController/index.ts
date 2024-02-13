@@ -1,9 +1,9 @@
-import RouterMethods from 'narch/src/decorators/routerMethods';
+import { RouterMethods } from 'narch/src/decorators/routerMethods';
 const { Put, Post, Delete, Get, Route } = RouterMethods;
 
 
 export default class tagsController {
-  constructor() {}
+  constructor() { }
 
   // GET:tags/:id
   get(id: string): string {

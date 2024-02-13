@@ -2,7 +2,7 @@ const FsManager = require("fs-manager");
 const path = require("path");
 const Controller = require("./controller");
 const CONTROLLER_PATH = "../dist/controllers";
-const AppConfig = require('../appConfig');
+const { AppConfig } = require("../appConfig");
 
 module.exports = class Controllers {
   fs;
@@ -40,13 +40,4 @@ module.exports = class Controllers {
     const controller = new Controller();
     return controller.info(controllerName);
   }
-}
-
-
-
-
-
-
-
-
-
+};
