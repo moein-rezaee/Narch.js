@@ -44,3 +44,21 @@ export type Decorator = {
     name?: string,
     url?: string,
 };
+
+export type FileInfo = {
+    data: any,
+    fieldName: string,
+    size: number,
+    filename: string,
+    mimeType: string,
+}
+
+export type FileDataInfo = {
+    data: any,
+    fieldName: string,
+    size: any,
+    ext: string,
+    filename: string,
+    mimeType: string,
+    address?: string,
+}
