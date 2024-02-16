@@ -3,7 +3,7 @@ import { MatchedDetail, MatchedPattern, Pattern, PatternInfo } from "../../types
 
 import Router from "../index";
 
-module.exports = class PatternMatcher implements IPatternMatcher {
+export class PatternMatcher implements IPatternMatcher {
   private readonly url: Pattern;
   private patternInfo: PatternInfo[] = [];
   private limitedPatterns: Pattern[] = [];

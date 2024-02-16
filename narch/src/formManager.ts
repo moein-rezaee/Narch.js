@@ -1,5 +1,5 @@
 const busboy = require('busboy');
-import { FileData } from "./FileData.js";
+import { FileData } from "./fileData.js";
 import { FileInfo } from "./types.js";
 
 

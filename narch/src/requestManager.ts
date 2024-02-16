@@ -1,5 +1,5 @@
-import { FormManager } from "./FormManager.js";
 import Endpoint from "./endpoint.js";
+import { FormManager } from "./formManager.js";
 
 export class RequestManager {
   req: any;
