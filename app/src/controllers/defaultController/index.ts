@@ -2,9 +2,11 @@ import { RouterMethods } from 'narch/src/decorators/routerMethods';
 const { Put, Post, Delete, Get, Route } = RouterMethods;
 
 // admin/blog
-// @Route("admin/blog")
+// ✅ @Route("admin/blog")
+
 // admin/blog
-// @Route("admin/[controller=blog]")
+// ✅ @Route("admin/[controller=blog]")
+
 // admin/default
 // @Route("admin/[controller]")
 // admin/default/[action]
@@ -27,10 +29,10 @@ class defaultController {
   // @Get("[controller]/[action=getOne]/:id")
 
   // GET:post/getOne/:id
-  @Get("[controller=post]/[action=getOne]")
+  // ✅ @Get("[controller=post]/[action=getOne]")
 
   // GET:blogs/:id
-  // @Get(":id")
+  // ✅ @Get(":id")
   get(id: string): string {
     return id;
   }
@@ -39,8 +41,9 @@ class defaultController {
   // @Get([action=getAll])
 
   // GET:blogs
-  // @Get
-  @Get('[controller]/[action]')
+  // ✅ @Get
+  
+  // ✅ @Get('[controller]/[action]')
   getAll(): Array<any> {
     return [];
   }
@@ -103,7 +106,7 @@ class defaultController {
   // ==================================
 
   @Delete()
-  // DELETE:blogs/:id
+  // ✅ DELETE:blogs/:id
   delete(id: string): string {
     return id;
   }
