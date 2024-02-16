@@ -21,17 +21,17 @@ module.exports = class ActionUrlParser extends BaseUrlParser {
 
   getControllerPattern() {
     const { pattern } = this.controllerRoute.url;
-    return this.getCleanPattern(pattern);  
+    return this.getCleanPattern(pattern);
   }
 
-  getCleanPattern(pattern) { 
+  getCleanPattern(pattern) {
     const hasSlash = this.hasSlash(pattern);
     if (hasSlash) return this.removeFirstSlash(pattern);
     return pattern;
   }
 
   removeFirstSlash(pattern) {
-    return pattern.substring(1, pattern.length);;
+    return pattern.substring(1, pattern.length);
   }
 
   hasSlash(pattern) {
@@ -40,7 +40,21 @@ module.exports = class ActionUrlParser extends BaseUrlParser {
   }
 
   getNewName(item, isAction = true) {
-    return item.split(isAction ? "action=" : "controller=")[1];
+    if (isAction) {
+      return this.splitNameFromAction(item);
+    } else {
+      return this.splitNameFromController(item);
+    }
+  }
+
+  splitNameFromController(item) {
+    const lastIndex = item.length - 1;
+    return item.slice(12, lastIndex);
+  }
+
+  splitNameFromAction(item) {
+    const lastIndex = item.length - 1;
+    return item.slice(8, lastIndex);
   }
 
   changeName(item, isAction = true) {
@@ -60,8 +74,8 @@ module.exports = class ActionUrlParser extends BaseUrlParser {
   // [controller=*]
   //نام جاری باید با نام کنترلر جایگزین شود
   changeController(item) {
-    const IS_CONTROLLER = false;
-    this.changeName(item, IS_CONTROLLER);
+    const IS_ACTION = false;
+    this.changeName(item, IS_ACTION);
   }
 
   // [action]

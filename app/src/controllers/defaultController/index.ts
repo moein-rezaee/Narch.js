@@ -13,7 +13,7 @@ const { Put, Post, Delete, Get, Route } = RouterMethods;
 // @Route("[controller]")
 // blog
 // @Route("[controller=blog]")
-@Route("blogs")
+@Route("admin/[controller=blog]")
 class defaultController {
   constructor() { }
 
@@ -27,7 +27,7 @@ class defaultController {
   // @Get("[controller]/[action=getOne]/:id")
 
   // GET:post/getOne/:id
-  // @Get("[controller=post]/[action=getOne]")
+  @Get("[controller=post]/[action=getOne]")
 
   // GET:blogs/:id
   // @Get(":id")

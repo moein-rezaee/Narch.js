@@ -20,12 +20,12 @@ module.exports = class Narch {
   private createServer(config: any): void {
     if (Narch.IsRun) return;
     AppConfig.Set(config);
-    const server = http.createServer((req: any, res: any) => {
+    const server = http.createServer(async (req: any, res: any) => {
       try {
-        RequestManager.Run(req, res);
+        await RequestManager.Run(req, res);
       } catch (error: any) {
         res.writeHead(500, { 'Content-Type': 'text/plain' });
-        res.end(error.message);
+        res.end(JSON.stringify(error));
       }
     });
     server.listen(3000);

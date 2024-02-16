@@ -16,8 +16,10 @@ module.exports = class ControllerUrlParser extends BaseUrlParser {
     return this.decorator.context.name;
   }
 
+  // split name from [controller=*] template
   getNewName(item) {
-    return item.split("controller=")[1];
+    const lastIndex =item.length - 1;
+    return item.slice(12, lastIndex);
   }
 
   // [controller]

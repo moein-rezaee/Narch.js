@@ -2,7 +2,7 @@ import { RouterMethods } from 'narch/src/decorators/routerMethods';
 const { Put, Post, Delete, Get, Route } = RouterMethods;
 
 
-export default class tagsController {
+class tagsController {
   constructor() { }
 
   // GET:tags/:id

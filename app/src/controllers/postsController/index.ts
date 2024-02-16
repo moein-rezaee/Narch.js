@@ -3,7 +3,7 @@ const { Put, Post, Delete, Get, Route } = RouterMethods;
 
 
 @Route("[controller]/[action]")
-export default class postsController {
+class postsController {
   constructor() { }
 
   // GET:posts/get/:id

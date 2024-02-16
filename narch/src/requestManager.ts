@@ -9,15 +9,15 @@ export class RequestManager {
     this.res = res;
   }
 
-  public static Run(req: any, res: any) {
+  public static async Run(req: any, res: any) {
     const reqManager = new RequestManager(req, res);
-    reqManager.run();
+    await reqManager.run();
   }
 
-  public run(): any {
+  public async run(): Promise<any> {
     const self: any = this;
     const method: string = self.req.method.toLowerCase();
-    self[method].call(self);
+    await self[method].call(self);
   }
 
   private async parseForm(): Promise<any> {
