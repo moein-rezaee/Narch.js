@@ -10,6 +10,7 @@
     "start": "node dist/index.js",
     "dev": "ts-node --esm src/index.ts",
     "tsx": "npx tsx src/index.ts",
+    "tsx-dev": "npx tsx src/models/blog.ts",
     "nodemon": "nodemon src/index.ts"
   },
   "keywords": [

@@ -1,11 +1,11 @@
 import ContextManager from "../router/contextManager.js";
-import { Decorator } from "../types.js";
+import { RouterMethod } from "../types.js";
 import { HttpMethods } from "./httpMethods.js";
 
 export class RouterMethods {
   static Route(pattern: string): Function {
     return function (context: Function): void {
-      const decorator: Decorator = {
+      const decorator: RouterMethod = {
         context: ContextManager.GetInfo(context),
         method: "ROUTE",
         name: undefined,
@@ -17,7 +17,7 @@ export class RouterMethods {
 
   static Get(pattern: string = ""): Function {
     return function (context: any, funcName: string, descriptor: PropertyDescriptor): void {
-      const decorator: Decorator = {
+      const decorator: RouterMethod = {
         context: ContextManager.GetInfo(context),
         method: "GET",
         name: funcName,
@@ -29,7 +29,7 @@ export class RouterMethods {
 
   static Put(pattern: string = ""): Function {
     return function (context: any, funcName: string, descriptor: PropertyDescriptor): void {
-      const decorator: Decorator = {
+      const decorator: RouterMethod = {
         context: ContextManager.GetInfo(context),
         method: "PUT",
         name: funcName,
@@ -41,7 +41,8 @@ export class RouterMethods {
 
   static Post(pattern: string = ""): Function {
     return function (context: any, funcName: string, descriptor: PropertyDescriptor): void {
-      const decorator: Decorator = {
+      type ArgumentTypes = Parameters<typeof descriptor.value>;
+      const decorator: RouterMethod = {
         context: ContextManager.GetInfo(context),
         method: "POST",
         name: funcName,
@@ -53,7 +54,7 @@ export class RouterMethods {
 
   static Delete(pattern: string = ""): Function {
     return function (context: any, funcName: string, descriptor: PropertyDescriptor): void {
-      const decorator: Decorator = {
+      const decorator: RouterMethod = {
         context: ContextManager.GetInfo(context),
         method: "DELETE",
         name: funcName,
@@ -63,3 +64,23 @@ export class RouterMethods {
     };
   }
 }
+
+
+
+
+// // Define a sample function
+// function exampleFunction(arg1: string, arg2:
+// 	number, arg3: boolean): void {
+// 	// Function body
+// }
+
+// type ArgumentTypes = Parameters<typeof exampleFunction>;
+
+// function logArgumentTypes(...args: ArgumentTypes):
+// 	void {
+// 	// Log the type of each argument
+// 	args.forEach(arg => console.log(typeof arg));
+// }
+
+// const args: ArgumentTypes = ['Geeks', 22, true];
+// logArgumentTypes(...args);

@@ -1,4 +1,6 @@
 import { RouterMethods } from 'narch/src/decorators/routerMethods';
+import { DataValidators } from 'narch/src/decorators/dataValidators';
+import { User } from '../../models/blog';
 const { Put, Post, Delete, Get, Route } = RouterMethods;
 
 @Route("blogs")
@@ -14,7 +16,7 @@ class defaultController {
   }
 
   @Post()
-  add(data: any, files: any): any {
+  add(data: User, files: any): any {
     return { data, files };
   }
 

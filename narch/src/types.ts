@@ -1,3 +1,10 @@
+export type DataValidator = {
+    key: string,
+    target: any, 
+    property: string | symbol, 
+    message?: string,
+    value?: number | any | string
+}
 
 export type RoutesData = {
     controllers: Array<any>,
@@ -38,7 +45,7 @@ export type ContextInfo = {
     instance: any,
 }
 
-export type Decorator = {
+export type RouterMethod = {
     context: ContextInfo,
     method: string,
     name?: string,

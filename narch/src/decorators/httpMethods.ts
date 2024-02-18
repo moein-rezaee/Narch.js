@@ -1,9 +1,9 @@
-import { Decorator } from "../types.js";
+import { RouterMethod } from "../types.js";
 
 export class HttpMethods {
-  static Decorators: Array<Decorator> = [];
+  static Decorators: Array<RouterMethod> = [];
 
-  static Add(decorator: Decorator): void {
+  static Add(decorator: RouterMethod): void {
     HttpMethods.Decorators.push(decorator);
   }
 }
