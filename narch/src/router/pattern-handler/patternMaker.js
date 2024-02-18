@@ -89,7 +89,7 @@ module.exports = class PatternMaker {
   oldPattern(method, parsedUrl) {
     const controllerName = this.getControllerPattern();
     let newUrl = this.getCleanUrl(method, parsedUrl);
-    return `${method}|${controllerName + newUrl}`;
+    return `${method}|${controllerName}/${newUrl}`;
   }
 
   newPattern(method, parsedUrl) {

@@ -25,20 +25,23 @@ export class RequestManager {
     return await formManager.parse(this.req);
   }
 
-  private async runByFormData() {
+  private  getEndPoint() { 
     const { url, method } = this.req;
+    return new Endpoint(decodeURIComponent(url), method);
+  }
+
+  private async runByFormData() {
+    const endpoint = this.getEndPoint();
     const { files, data } = await this.parseForm();
-    const endpoint = new Endpoint(url, method);
     const result = endpoint.execute(data, files);
-    this.res.writeHead(200, { 'Content-Type': 'text/plain' });
+    this.res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
     this.res.end(JSON.stringify(result));
   }
 
   private async runByUrlParam() {
-    const { url, method } = this.req;
-    const endpoint = new Endpoint(url, method);
+    const endpoint = this.getEndPoint();
     const result = endpoint.execute();
-    this.res.writeHead(200, { 'Content-Type': 'text/plain' });
+    this.res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
     this.res.end(JSON.stringify(result));
   }
 
