@@ -1,6 +1,6 @@
 export type DataValidator = {
     key: string,
-    target: any, 
+    context: any, 
     property: string | symbol, 
     message?: string,
     value?: number | any | string
@@ -68,4 +68,12 @@ export type FileDataInfo = {
     filename: string,
     mimeType: string,
     address?: string,
+}
+
+
+export type ModelValidatorType = {
+    model: any,
+    key: string,
+    context: ContextInfo,
+    funcName: string | symbol
 }

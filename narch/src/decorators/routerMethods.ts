@@ -41,7 +41,6 @@ export class RouterMethods {
 
   static Post(pattern: string = ""): Function {
     return function (context: any, funcName: string, descriptor: PropertyDescriptor): void {
-      type ArgumentTypes = Parameters<typeof descriptor.value>;
       const decorator: RouterMethod = {
         context: ContextManager.GetInfo(context),
         method: "POST",
@@ -64,23 +63,3 @@ export class RouterMethods {
     };
   }
 }
-
-
-
-
-// // Define a sample function
-// function exampleFunction(arg1: string, arg2:
-// 	number, arg3: boolean): void {
-// 	// Function body
-// }
-
-// type ArgumentTypes = Parameters<typeof exampleFunction>;
-
-// function logArgumentTypes(...args: ArgumentTypes):
-// 	void {
-// 	// Log the type of each argument
-// 	args.forEach(arg => console.log(typeof arg));
-// }
-
-// const args: ArgumentTypes = ['Geeks', 22, true];
-// logArgumentTypes(...args);

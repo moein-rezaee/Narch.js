@@ -1,152 +1,158 @@
 import { DataValidator } from "../types"
+import { DataValidatorManager } from "./dataValidatorManager";
 
 export class DataValidators {
     static Title(title: string) {
-        return function (target: Object, property: string | symbol) {
+        return function (context: Object, property: string | symbol) {
             const data: DataValidator = {
                 key: "title",
-                target, 
-                property, 
-                value: title ?? property 
+                context,
+                property,
+                value: title ?? property
             }
             DataValidatorManager.Add(data);
         }
     }
 
     static Require(message: string = "وارد کردن فیلد اجباری می باشد") {
-        return function (target: Object, property: string | symbol) {
+        return function (context: Object, property: string | symbol) {
             const data: DataValidator = {
                 key: "require",
-                target, 
-                property, 
-                message 
+                context,
+                property,
+                message
             }
+            DataValidatorManager.Add(data);
         }
     }
 
     static MaxLength(max: number, message: string = "طول فیلد بیشتر از حد مجاز می باشد") {
-        return function (target: Object, property: string | symbol) {
+        return function (context: Object, property: string | symbol) {
             const data: DataValidator = {
                 key: "max",
-                target, 
-                property, 
+                context,
+                property,
                 message,
                 value: max
             }
+            DataValidatorManager.Add(data);
         }
     }
 
     static MinLength(min: number, message: string = "طول فیلد کمتر از حد مجاز می باشد") {
-        return function (target: Object, property: string | symbol) {
+        return function (context: Object, property: string | symbol) {
             const data: DataValidator = {
                 key: "min",
-                target, 
-                property, 
+                context,
+                property,
                 message,
                 value: min
             }
+            DataValidatorManager.Add(data);
         }
     }
 
     static Range(startNum: number, endNum: number, message: string = "عدد وارد شده معتبر نمی باشد") {
-        return function (target: Object, property: string | symbol) {
+        return function (context: Object, property: string | symbol) {
             const data: DataValidator = {
                 key: "range",
-                target, 
-                property, 
+                context,
+                property,
                 message,
                 value: {
                     startNum,
                     endNum
                 }
             }
+            DataValidatorManager.Add(data);
         }
     }
 
     static Compare(otherProp: string, message: string = "مقادیر این فیلد با فیلد مقایسه شده برابر نمی باشد") {
-        return function (target: Object, property: string | symbol) {
+        return function (context: Object, property: string | symbol) {
             const data: DataValidator = {
                 key: "compare",
-                target, 
-                property, 
+                context,
+                property,
                 message,
                 value: otherProp
             };
+            DataValidatorManager.Add(data);
         }
     }
 
     static Email(message: string = "پست الکترونیک وارد شده معتبر نمی باشد") {
-        return function (target: Object, property: string | symbol) {
+        return function (context: Object, property: string | symbol) {
             const data: DataValidator = {
                 key: "email",
-                target, 
-                property, 
+                context,
+                property,
                 message,
             };
+            DataValidatorManager.Add(data);
         }
     }
 
     static Phone(message: string = "شماره همراه وارد شده معتبر نمی باشد") {
-        return function (target: Object, property: string | symbol) {
+        return function (context: Object, property: string | symbol) {
             const data: DataValidator = {
                 key: "phone",
-                target, 
-                property, 
+                context,
+                property,
                 message,
             };
+            DataValidatorManager.Add(data);
         }
     }
 
     static Mobile(message: string = "شماره همراه وارد شده معتبر نمی باشد") {
-        return function (target: Object, property: string | symbol) {
+        return function (context: Object, property: string | symbol) {
             const data: DataValidator = {
                 key: "mobile",
-                target, 
-                property, 
+                context,
+                property,
                 message,
             };
+            DataValidatorManager.Add(data);
         }
     }
 
     static Url(message: string = "پیوند وارد شده نامعتبر می باشد") {
-        return function (target: Object, property: string | symbol) {
+        return function (context: Object, property: string | symbol) {
             const data: DataValidator = {
                 key: "url",
-                target, 
-                property, 
+                context,
+                property,
                 message,
             };
+            DataValidatorManager.Add(data);
         }
     }
 
     static PostalCode(message: string = "کدپستی وارد شده نامعتبر می باشد") {
-        return function (target: Object, property: string | symbol) {
+        return function (context: Object, property: string | symbol) {
             const data: DataValidator = {
                 key: "postalCode",
-                target, 
-                property, 
+                context,
+                property,
                 message,
             };
+            DataValidatorManager.Add(data);
         }
     }
 
     static MeliCode(message: string = "کدملی وارد شده نامعتبر می باشد") {
-        return function (target: Object, property: string | symbol) {
+        return function (context: Object, property: string | symbol) {
             const data: DataValidator = {
                 key: "meliCode",
-                target, 
-                property, 
+                context,
+                property,
                 message,
             };
+            DataValidatorManager.Add(data);
         }
     }
-    
+
 }
 
-export class DataValidatorManager {
-    static Decorators: Array<DataValidator> = [];
-  
-    static Add(decorator: DataValidator): void {
-        DataValidatorManager.Decorators.push(decorator);
-    }
-  }
+

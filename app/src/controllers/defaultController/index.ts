@@ -1,7 +1,9 @@
+import { ModelValidator } from 'narch/src/decorators/modelValidator';
 import { RouterMethods } from 'narch/src/decorators/routerMethods';
-import { DataValidators } from 'narch/src/decorators/dataValidators';
+// import { DataValidators } from 'narch/src/decorators/ModelValidator';
 import { User } from '../../models/blog';
 const { Put, Post, Delete, Get, Route } = RouterMethods;
+const { Model } = ModelValidator;
 
 @Route("blogs")
 class defaultController {
@@ -16,8 +18,9 @@ class defaultController {
   }
 
   @Post()
-  add(data: User, files: any): any {
-    return { data, files };
+  @Model(User)
+  add(user: User, files: any): any {  
+    return { user, files };
   }
 
   @Put()
@@ -30,5 +33,7 @@ class defaultController {
     return id;
   }
 };
+
+const inst = new defaultController();
 
 module.exports = defaultController;

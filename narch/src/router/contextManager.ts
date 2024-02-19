@@ -1,4 +1,5 @@
-import { ContextInfo } from "../../types.js";
+import { ContextInfo } from "../types";
+
 export default class ContextManager {
   context: any;
   constructor(context: any) {
