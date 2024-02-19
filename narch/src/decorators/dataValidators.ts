@@ -3,10 +3,10 @@ import { DataValidatorManager } from "./dataValidatorManager";
 
 export class DataValidators {
     static Title(title: string) {
-        return function (context: Object, property: string | symbol) {
+        return function (target: any, property: string | symbol) {
             const data: DataValidator = {
                 key: "title",
-                context,
+                context: target.constructor,
                 property,
                 value: title ?? property
             }
@@ -15,10 +15,10 @@ export class DataValidators {
     }
 
     static Require(message: string = "وارد کردن فیلد اجباری می باشد") {
-        return function (context: Object, property: string | symbol) {
+        return function (target: any, property: string | symbol) {
             const data: DataValidator = {
                 key: "require",
-                context,
+                context: target.constructor,
                 property,
                 message
             }
@@ -27,10 +27,10 @@ export class DataValidators {
     }
 
     static MaxLength(max: number, message: string = "طول فیلد بیشتر از حد مجاز می باشد") {
-        return function (context: Object, property: string | symbol) {
+        return function (target: any, property: string | symbol) {
             const data: DataValidator = {
                 key: "max",
-                context,
+                context: target.constructor,
                 property,
                 message,
                 value: max
@@ -40,10 +40,10 @@ export class DataValidators {
     }
 
     static MinLength(min: number, message: string = "طول فیلد کمتر از حد مجاز می باشد") {
-        return function (context: Object, property: string | symbol) {
+        return function (target: any, property: string | symbol) {
             const data: DataValidator = {
                 key: "min",
-                context,
+                context: target.constructor,
                 property,
                 message,
                 value: min
@@ -53,10 +53,10 @@ export class DataValidators {
     }
 
     static Range(startNum: number, endNum: number, message: string = "عدد وارد شده معتبر نمی باشد") {
-        return function (context: Object, property: string | symbol) {
+        return function (target: any, property: string | symbol) {
             const data: DataValidator = {
                 key: "range",
-                context,
+                context: target.constructor,
                 property,
                 message,
                 value: {
@@ -69,10 +69,10 @@ export class DataValidators {
     }
 
     static Compare(otherProp: string, message: string = "مقادیر این فیلد با فیلد مقایسه شده برابر نمی باشد") {
-        return function (context: Object, property: string | symbol) {
+        return function (target: any, property: string | symbol) {
             const data: DataValidator = {
                 key: "compare",
-                context,
+                context: target.constructor,
                 property,
                 message,
                 value: otherProp
@@ -82,10 +82,10 @@ export class DataValidators {
     }
 
     static Email(message: string = "پست الکترونیک وارد شده معتبر نمی باشد") {
-        return function (context: Object, property: string | symbol) {
+        return function (target: any, property: string | symbol) {
             const data: DataValidator = {
                 key: "email",
-                context,
+                context: target.constructor,
                 property,
                 message,
             };
@@ -94,10 +94,10 @@ export class DataValidators {
     }
 
     static Phone(message: string = "شماره همراه وارد شده معتبر نمی باشد") {
-        return function (context: Object, property: string | symbol) {
+        return function (target: any, property: string | symbol) {
             const data: DataValidator = {
                 key: "phone",
-                context,
+                context: target.constructor,
                 property,
                 message,
             };
@@ -106,10 +106,10 @@ export class DataValidators {
     }
 
     static Mobile(message: string = "شماره همراه وارد شده معتبر نمی باشد") {
-        return function (context: Object, property: string | symbol) {
+        return function (target: any, property: string | symbol) {
             const data: DataValidator = {
                 key: "mobile",
-                context,
+                context: target.constructor,
                 property,
                 message,
             };
@@ -118,10 +118,10 @@ export class DataValidators {
     }
 
     static Url(message: string = "پیوند وارد شده نامعتبر می باشد") {
-        return function (context: Object, property: string | symbol) {
+        return function (target: any, property: string | symbol) {
             const data: DataValidator = {
                 key: "url",
-                context,
+                context: target.constructor,
                 property,
                 message,
             };
@@ -130,10 +130,10 @@ export class DataValidators {
     }
 
     static PostalCode(message: string = "کدپستی وارد شده نامعتبر می باشد") {
-        return function (context: Object, property: string | symbol) {
+        return function (target: any, property: string | symbol) {
             const data: DataValidator = {
                 key: "postalCode",
-                context,
+                context: target.constructor,
                 property,
                 message,
             };
@@ -142,10 +142,10 @@ export class DataValidators {
     }
 
     static MeliCode(message: string = "کدملی وارد شده نامعتبر می باشد") {
-        return function (context: Object, property: string | symbol) {
+        return function (target: any, property: string | symbol) {
             const data: DataValidator = {
                 key: "meliCode",
-                context,
+                context: target.constructor,
                 property,
                 message,
             };

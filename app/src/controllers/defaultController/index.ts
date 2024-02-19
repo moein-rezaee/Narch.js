@@ -1,9 +1,9 @@
-import { ModelValidator } from 'narch/src/decorators/modelValidator';
+import { ModelDecorator } from 'narch/src/decorators/modelDecorator';
 import { RouterMethods } from 'narch/src/decorators/routerMethods';
 // import { DataValidators } from 'narch/src/decorators/ModelValidator';
 import { User } from '../../models/blog';
 const { Put, Post, Delete, Get, Route } = RouterMethods;
-const { Model } = ModelValidator;
+const { Model } = ModelDecorator;
 
 @Route("blogs")
 class defaultController {

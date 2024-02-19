@@ -71,8 +71,8 @@ export type FileDataInfo = {
 }
 
 
-export type ModelValidatorType = {
-    model: any,
+export type ModelDecoratorType = {
+    entity: any,
     key: string,
     context: ContextInfo,
     funcName: string | symbol

@@ -1,17 +1,17 @@
 import ContextManager from "../router/contextManager";
-import { ModelValidatorType } from "../types";
-import { ModelValidatorManager } from "./modelValidatorManager";
+import { ModelDecoratorType } from "../types";
+import { ModelDecoratorManager } from "./modelDecoratorManager";
 
-export class ModelValidator {
-    static Model<T>(model: T, key?: string) {
+export class ModelDecorator {
+    static Model<T>(entity: T, key?: string) {
         return function (context: any, funcName: string | symbol) {
-            const data: ModelValidatorType = {
-                model,
-                key: key ?? camelize((model as any).name),
+            const data: ModelDecoratorType = {
+                entity,
+                key: key ?? camelize((entity as any).name),
                 context: ContextManager.GetInfo(context),
                 funcName
             }
-            ModelValidatorManager.Add(data);
+            ModelDecoratorManager.Add(data);
         }
     }
 }
