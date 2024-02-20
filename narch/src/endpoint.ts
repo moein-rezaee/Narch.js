@@ -18,15 +18,15 @@ class Endpoint implements IEndpoint {
     const values = this.getArgsValue(endpoint.action.args);
     if (data) {
 
-      const modelInstance = endpoint.model.entity();
-      Object.keys(endpoint.dataValidators).forEach(prop => {
-          const validator = endpoint.dataValidators[prop];
-          const field = data[prop];
-          // TODO:
-          // Add Class for eatch validator like email، require, ...
-          // Make Instance in DataValidator Decorators
-          // Add ValidateFunction get field and validate it
-      })
+      // const modelInstance = endpoint.model.entity();
+      // Object.keys(endpoint.dataValidators).forEach(prop => {
+      //     const validator = endpoint.dataValidators[prop];
+      //     const field = data[prop];
+      //     // TODO:
+      //     // Add Class for eatch validator like email، require, ...
+      //     // Make Instance in DataValidator Decorators
+      //     // Add ValidateFunction get field and validate it
+      // })
 
       return endpoint.action.instance.call(endpoint.context.instance, ...[data, files]);
     } else

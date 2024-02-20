@@ -1,9 +1,6 @@
 const ActionUrlGenerator = require("./url-generator/actionUrlGenerator");
 const { HttpMethods } = require("../decorators/httpMethods");
-const { DataValidatorManager } = require("../decorators/dataValidatorManager");
-const {
-  ModelDecoratorManager,
-} = require("../decorators/modelDecoratorManager");
+const { ModelValidator } = require("../decorators/modelValidator");
 module.exports = class ActionRouter {
   generate(controllerRoute, func) {
     this.foreach(
@@ -29,13 +26,12 @@ module.exports = class ActionRouter {
       const method = methods[name];
       const routerMethod = this.decorator(controller.name, name);
       const model = this.model(controller.name, name);
-      const dataValidators = this.dataValidators(model);
-      if (func) func(method, { model, routerMethod, dataValidators });
+      if (func) func(method, { model, routerMethod });
     }
   }
 
   route(info) {
-    const { controllerRoute, action, decorator, model, dataValidators } = info;
+    const { controllerRoute, action, decorator, model } = info;
     const url = this.url(info);
     return {
       isController: false,
@@ -43,7 +39,6 @@ module.exports = class ActionRouter {
       method: decorator?.method ?? "GET",
       decorator,
       model,
-      dataValidators,
       action,
       url,
     };
@@ -58,32 +53,7 @@ module.exports = class ActionRouter {
   }
 
   model(controllerName, funcName) {
-    return (
-      ModelDecoratorManager.Decorators?.find(
-        (i) => i.context.name == controllerName && i.funcName == funcName
-      ) ?? null
-    );
-  }
-
-  dataValidators(model) {
-    const list = {};
-    if (model) {
-      const modelInstance = new model.entity();
-      Object.keys(modelInstance).forEach((prop) => {
-        list[prop] = DataValidatorManager.Decorators.filter(
-          (i) => i.property === prop && new i.context().constructor === modelInstance.constructor
-        );
-      });
-    }
-    return list;
-  }
-
-  dataValidator(controllerName, funcName) {
-    return (
-      ModelDecoratorManager.Decorators?.find(
-        (i) => i.context.name == controllerName && i.funcName == funcName
-      ) ?? null
-    );
+    return new ModelValidator(controllerName, funcName)
   }
 
   url(info) {
@@ -91,3 +61,5 @@ module.exports = class ActionRouter {
     return urlGenerator.generate();
   }
 };
+
+

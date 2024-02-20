@@ -3,7 +3,8 @@ export type DataValidator = {
     context: any, 
     property: string | symbol, 
     message?: string,
-    value?: number | any | string
+    value?: number | any | string,
+    validator?: any
 }
 
 export type RoutesData = {

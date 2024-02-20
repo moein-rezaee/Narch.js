@@ -12,7 +12,6 @@ const {
     Url,
     PostalCode,
     MeliCode,
-
  } = DataValidators;
 
 export class User {
@@ -27,10 +26,10 @@ export class User {
     @Title("گذرواژه")
     @MinLength(15)
     @MaxLength(250)
+    @Compare("passwordCompare")
     password: string = "";
     
     @Title("تکرار گذرواژه")
-    @Compare("password")
     passwordCompare: string = "";
     
     @Require()

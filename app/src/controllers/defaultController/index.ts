@@ -1,7 +1,7 @@
 import { ModelDecorator } from 'narch/src/decorators/modelDecorator';
 import { RouterMethods } from 'narch/src/decorators/routerMethods';
 // import { DataValidators } from 'narch/src/decorators/ModelValidator';
-import { User } from '../../models/blog';
+import { User } from '../../models/user';
 const { Put, Post, Delete, Get, Route } = RouterMethods;
 const { Model } = ModelDecorator;
 

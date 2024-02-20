@@ -1,5 +1,6 @@
 import { DataValidator } from "../types"
 import { DataValidatorManager } from "./dataValidatorManager";
+import { CompareValidator, EmailValidator, MaxLengthValidator, MeliCodeValidator, MobileValidator, RangeValidator, RequireValidator, UrlValidator } from "./validators/reqireValidator";
 
 export class DataValidators {
     static Title(title: string) {
@@ -8,7 +9,7 @@ export class DataValidators {
                 key: "title",
                 context: target.constructor,
                 property,
-                value: title ?? property
+                value: title ?? property,
             }
             DataValidatorManager.Add(data);
         }
@@ -20,7 +21,8 @@ export class DataValidators {
                 key: "require",
                 context: target.constructor,
                 property,
-                message
+                message,
+                validator: new RequireValidator(message)
             }
             DataValidatorManager.Add(data);
         }
@@ -33,7 +35,8 @@ export class DataValidators {
                 context: target.constructor,
                 property,
                 message,
-                value: max
+                value: max,
+                validator: new MaxLengthValidator(max, message)
             }
             DataValidatorManager.Add(data);
         }
@@ -46,7 +49,8 @@ export class DataValidators {
                 context: target.constructor,
                 property,
                 message,
-                value: min
+                value: min,
+                validator: new MaxLengthValidator(min, message)
             }
             DataValidatorManager.Add(data);
         }
@@ -54,15 +58,17 @@ export class DataValidators {
 
     static Range(startNum: number, endNum: number, message: string = "عدد وارد شده معتبر نمی باشد") {
         return function (target: any, property: string | symbol) {
+            const value = {
+                startNum,
+                endNum
+            }
             const data: DataValidator = {
                 key: "range",
                 context: target.constructor,
                 property,
                 message,
-                value: {
-                    startNum,
-                    endNum
-                }
+                value,
+                validator: new RangeValidator(value, message)
             }
             DataValidatorManager.Add(data);
         }
@@ -75,7 +81,8 @@ export class DataValidators {
                 context: target.constructor,
                 property,
                 message,
-                value: otherProp
+                value: otherProp,
+                validator: new CompareValidator(otherProp, message)
             };
             DataValidatorManager.Add(data);
         }
@@ -88,6 +95,7 @@ export class DataValidators {
                 context: target.constructor,
                 property,
                 message,
+                validator: new EmailValidator(message)
             };
             DataValidatorManager.Add(data);
         }
@@ -112,6 +120,7 @@ export class DataValidators {
                 context: target.constructor,
                 property,
                 message,
+                validator: new MobileValidator(message)
             };
             DataValidatorManager.Add(data);
         }
@@ -124,6 +133,7 @@ export class DataValidators {
                 context: target.constructor,
                 property,
                 message,
+                validator: new UrlValidator(message)
             };
             DataValidatorManager.Add(data);
         }
@@ -148,6 +158,7 @@ export class DataValidators {
                 context: target.constructor,
                 property,
                 message,
+                validator: new MeliCodeValidator(message)
             };
             DataValidatorManager.Add(data);
         }
