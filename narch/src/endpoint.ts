@@ -17,41 +17,7 @@ class Endpoint implements IEndpoint {
     const values = this.getArgsValue(endpoint.action.args);
     if (data) {
 
-      const propValidators = endpoint.model.propValidators;
-      if (propValidators) {
-        const validatorResult: any = {}
-        Object.keys(propValidators).forEach(prop => {
-          const dataValidators: Array<FieldDecoratorType> = propValidators[prop].dataValidator;
-          const field = data[prop];
-          dataValidators.forEach((dataValidator: FieldDecoratorType) => {
-            let title: string = "";
-            const key = dataValidator.key;
-            if (key == "title") {
-              title = dataValidator.value as string;
-            }
-            else if (key == "compare") {
-              const otherProp: string = dataValidator.validator.otherProp;
-              if (validatorResult[prop]) {
-                validatorResult[prop][key] = dataValidator.validator.validate(field, data[otherProp]);
-              } else {
-                validatorResult[prop] = { [key]: dataValidator.validator.validate(field, data[otherProp]) };
-              }
-            }
-            else {
-              if (validatorResult[prop]) {
-                validatorResult[prop][key] = dataValidator.validator.validate(field);
-              } else {
-                validatorResult[prop] = { [key]: dataValidator.validator.validate(field) };
-              }
-            }
-          });
-          // TODO:
-          // Add Class for eatch validator like email، require, ...
-          // Make Instance in DataValidator Decorators
-          // Add ValidateFunction get field and validate it
-        });
-      }
-
+      const validateResult = endpoint.modelValidator.validate(data);
       return endpoint.action.instance.call(endpoint.context.instance, ...[data, files]);
     } else
       return endpoint.action.instance.call(endpoint.context.instance, ...values);

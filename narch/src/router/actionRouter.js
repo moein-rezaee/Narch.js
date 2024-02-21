@@ -1,15 +1,12 @@
 const ActionUrlGenerator = require("./url-generator/actionUrlGenerator");
-const { HttpMethods } = require("../decorators/httpMethods");
-const { ModelValidator } = require("../decorators/modelValidator");
+const { RouterDecoratorManager } = require("../decorators/routerDecorator/manager");
+const { ModelValidator } = require("../validators/modelValidator");
 module.exports = class ActionRouter {
   generate(controllerRoute, func) {
-    this.foreach(
-      controllerRoute.controller,
-      (action, { model, routerMethod, dataValidators }) => {
+    this.foreach(controllerRoute.controller, (action, { modelValidator, routerMethod }) => {
         const info = {
           decorator: routerMethod,
-          model,
-          dataValidators,
+          modelValidator,
           controllerRoute,
           action,
         };
@@ -25,20 +22,20 @@ module.exports = class ActionRouter {
       if (name == "constructor") continue;
       const method = methods[name];
       const routerMethod = this.decorator(controller.name, name);
-      const model = this.model(controller.name, name);
-      if (func) func(method, { model, routerMethod });
+      const modelValidator = this.model(controller.name, name);
+      if (func) func(method, { modelValidator, routerMethod });
     }
   }
 
   route(info) {
-    const { controllerRoute, action, decorator, model } = info;
+    const { controllerRoute, action, decorator, modelValidator } = info;
     const url = this.url(info);
     return {
       isController: false,
       context: controllerRoute.controller,
       method: decorator?.method ?? "GET",
       decorator,
-      model,
+      modelValidator,
       action,
       url,
     };
@@ -46,7 +43,7 @@ module.exports = class ActionRouter {
 
   decorator(controllerName, funcName) {
     return (
-      HttpMethods.Decorators?.find(
+      RouterDecoratorManager.Decorators?.find(
         (i) => i.context.name == controllerName && i.name == funcName
       ) ?? null
     );

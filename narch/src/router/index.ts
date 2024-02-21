@@ -1,8 +1,8 @@
 import { IRouter } from "../interfaces";
 import { Pattern, RoutesData } from "../types";
 
-const ActionRouter = require("./actionRouter");
-const ControllerRouter = require("./controllerRouter");
+import ActionRouter from "./actionRouter";
+import ControllerRouter from "./controllerRouter";
 
 
 export default class Router implements IRouter {

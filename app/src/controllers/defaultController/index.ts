@@ -34,6 +34,4 @@ class defaultController {
   }
 };
 
-const inst = new defaultController();
-
 module.exports = defaultController;

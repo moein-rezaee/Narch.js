@@ -1,5 +1,5 @@
 import { ModelDecoratorManager } from "../decorators/modelDecorator/manager";
-import { ModelDecoratorType } from "../types";
+import { FieldDecoratorType, ModelDecoratorType } from "../types";
 import { PropValidator } from "./propValidator";
 
 export class ModelValidator {
@@ -8,6 +8,40 @@ export class ModelValidator {
     constructor(controllerName: string, funcName: string) {
         this._model = this.findModel(controllerName, funcName);
         this.setPropValidators();
+    }
+
+    public validate(data: any) {
+        const propValidators = this.propValidators;
+        const validatorResult: any = {}
+        if (propValidators) {
+            Object.keys(propValidators).forEach(prop => {
+                const dataValidators: Array<FieldDecoratorType> = propValidators[prop].dataValidator;
+                const field = data[prop];
+                dataValidators.forEach((dataValidator: FieldDecoratorType) => {
+                    let title: string = "";
+                    const key = dataValidator.key;
+                    if (key == "title") {
+                        title = dataValidator.value as string;
+                    }
+                    else if (key == "compare") {
+                        const otherProp: string = dataValidator.validator.otherProp;
+                        if (validatorResult[prop]) {
+                            validatorResult[prop][key] = dataValidator.validator.validate(field, data[otherProp]);
+                        } else {
+                            validatorResult[prop] = { [key]: dataValidator.validator.validate(field, data[otherProp]) };
+                        }
+                    }
+                    else {
+                        if (validatorResult[prop]) {
+                            validatorResult[prop][key] = dataValidator.validator.validate(field);
+                        } else {
+                            validatorResult[prop] = { [key]: dataValidator.validator.validate(field) };
+                        }
+                    }
+                });
+            });
+        }
+        return validatorResult;
     }
 
     get model(): ModelDecoratorType | undefined {
@@ -28,7 +62,7 @@ export class ModelValidator {
         this.inProps((prop: string, modelInstance: any) => this.addProp(prop, modelInstance));
     }
 
-    addProp(prop: string, modelInstance: any) {
+    private addProp(prop: string, modelInstance: any) {
         this._propValidators[prop] = new PropValidator(prop, modelInstance);
     }
 
