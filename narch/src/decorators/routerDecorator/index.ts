@@ -1,8 +1,8 @@
-import ContextManager from "../router/contextManager.js";
-import { RouterMethod } from "../types.js";
-import { HttpMethods } from "./httpMethods.js";
+import ContextManager from "../../router/contextManager.js";
+import { RouterMethod } from "../../types.js";
+import { RouterDecoratorManager } from "./manager.js";
 
-export class RouterMethods {
+export class RouterDecorator {
   static Route(pattern: string): Function {
     return function (context: Function): void {
       const decorator: RouterMethod = {
@@ -11,7 +11,7 @@ export class RouterMethods {
         name: undefined,
         url: pattern,
       };
-      HttpMethods.Add(decorator);
+      RouterDecoratorManager.Add(decorator);
     };
   }
 
@@ -23,7 +23,7 @@ export class RouterMethods {
         name: funcName,
         url: pattern,
       };
-      HttpMethods.Add(decorator);
+      RouterDecoratorManager.Add(decorator);
     };
   }
 
@@ -35,7 +35,7 @@ export class RouterMethods {
         name: funcName,
         url: pattern,
       };
-      HttpMethods.Add(decorator);
+      RouterDecoratorManager.Add(decorator);
     };
   }
 
@@ -47,7 +47,7 @@ export class RouterMethods {
         name: funcName,
         url: pattern,
       };
-      HttpMethods.Add(decorator);
+      RouterDecoratorManager.Add(decorator);
     };
   }
 
@@ -59,7 +59,7 @@ export class RouterMethods {
         name: funcName,
         url: pattern,
       };
-      HttpMethods.Add(decorator);
+      RouterDecoratorManager.Add(decorator);
     };
   }
 }

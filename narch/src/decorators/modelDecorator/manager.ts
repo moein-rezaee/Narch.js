@@ -1,4 +1,4 @@
-import { ModelDecoratorType } from "../types";
+import { ModelDecoratorType } from "../../types";
 
 export class ModelDecoratorManager {
     static Decorators: Array<ModelDecoratorType> = [];

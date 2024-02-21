@@ -1,4 +1,4 @@
-import { DataValidators } from 'narch/src/decorators/dataValidators';
+import { FieldDecorator } from 'narch/src/decorators/fieldDecorator';
 const { 
     Title,
     Require,
@@ -11,7 +11,7 @@ const {
     Url,
     PostalCode,
     MeliCode,
- } = DataValidators;
+ } = FieldDecorator;
 
 export class User {
     @Require()

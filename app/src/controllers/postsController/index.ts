@@ -1,6 +1,5 @@
-import { RouterMethods } from 'narch/src/decorators/routerMethods';
-const { Put, Post, Delete, Get, Route } = RouterMethods;
-
+import { RouterDecorator } from 'narch/src/decorators/routerDecorator';
+const { Put, Post, Delete, Get, Route } = RouterDecorator;
 
 @Route("[controller]/[action]")
 class postsController {

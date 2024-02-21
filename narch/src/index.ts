@@ -3,7 +3,7 @@ import http from "http";
 import { AppConfig } from "./appConfig.js";
 import { RequestManager } from "./requestManager.js";
 
-module.exports = class Narch {
+export class Narch {
   public static Instance: Narch;
   public static IsRun: boolean = false;
 

@@ -1,13 +1,13 @@
 module.exports = {
   controller: {
-    empty: (name) => `import { RouterMethods } from 'narch/src/decorators/routerMethods';
-    const { Put, Post, Delete, Get, Route } = RouterMethods;
+    empty: (name) => `import { RouterDecorator } from 'narch/src/decorators/routerDecorator';
+    const { Put, Post, Delete, Get, Route } = RouterDecorator;
     module.exports = class ${name}Controller {
         constructor() {
         }
     }`,
-    restful: (name) => `import { RouterMethods } from 'narch/src/decorators/routerMethods';
-    const { Put, Post, Delete, Get, Route } = RouterMethods;
+    restful: (name) => `import { RouterDecorator } from 'narch/src/decorators/routerDecorator';
+    const { Put, Post, Delete, Get, Route } = RouterDecorator;
     module.exports = class ${name}Controller {
       get(id: string): string {
         return id;

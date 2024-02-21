@@ -1,8 +1,8 @@
-import { ModelDecorator } from 'narch/src/decorators/modelDecorator';
-import { RouterMethods } from 'narch/src/decorators/routerMethods';
-// import { DataValidators } from 'narch/src/decorators/ModelValidator';
+import { RouterDecorator } from 'narch/src/decorators/routerDecorator';
+const { Put, Post, Delete, Get, Route } = RouterDecorator;
+
 import { User } from '../../models/user';
-const { Put, Post, Delete, Get, Route } = RouterMethods;
+import { ModelDecorator } from 'narch/src/decorators/modelDecorator';
 const { Model } = ModelDecorator;
 
 @Route("blogs")

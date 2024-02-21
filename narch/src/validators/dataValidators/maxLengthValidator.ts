@@ -12,8 +12,7 @@ export class MaxLengthValidator {
         return this._message;
     }
 
-    validate(field?: number): boolean {
-        const num = Number(field);
-        return Boolean(num && (num < this.maxLength));
+    validate(field?: string): boolean {
+        return Boolean(field && (field.length < this.maxLength));
     }
 }

@@ -1,4 +1,4 @@
-export type DataValidator = {
+export type FieldDecoratorType = {
     key: string,
     context: any, 
     property: string | symbol, 

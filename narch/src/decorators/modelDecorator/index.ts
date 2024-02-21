@@ -1,6 +1,6 @@
-import ContextManager from "../router/contextManager";
-import { ModelDecoratorType } from "../types";
-import { ModelDecoratorManager } from "./modelDecoratorManager";
+import ContextManager from "../../router/contextManager";
+import { ModelDecoratorType } from "../../types";
+import { ModelDecoratorManager } from "./manager";
 
 export class ModelDecorator {
     static Model<T>(entity: T, key?: string) {
