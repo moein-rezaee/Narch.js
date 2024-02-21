@@ -1,6 +1,6 @@
 import { DataValidator } from "../types"
 import { DataValidatorManager } from "./dataValidatorManager";
-import { CompareValidator, EmailValidator, MaxLengthValidator, MeliCodeValidator, MobileValidator, RangeValidator, RequireValidator, UrlValidator } from "./validators/reqireValidator";
+import { CompareValidator, EmailValidator, LengthValidator, MaxLengthValidator, MeliCodeValidator, MobileValidator, PostalCodeValidator, RangeValidator, RequireValidator, UrlValidator } from "./validators";
 
 export class DataValidators {
     static Title(title: string) {
@@ -56,7 +56,21 @@ export class DataValidators {
         }
     }
 
-    static Range(startNum: number, endNum: number, message: string = "عدد وارد شده معتبر نمی باشد") {
+    static Length(strLength: number, message: string = "طول فیلد غیرمجاز می باشد") {
+        return function (target: any, property: string | symbol) {
+            const data: DataValidator = {
+                key: "min",
+                context: target.constructor,
+                property,
+                message,
+                value: strLength,
+                validator: new LengthValidator(strLength, message)
+            }
+            DataValidatorManager.Add(data);
+        }
+    }
+
+    static Range(startNum: number, endNum: number, message: string = "عدد معتبر نمی باشد") {
         return function (target: any, property: string | symbol) {
             const value = {
                 startNum,
@@ -88,7 +102,7 @@ export class DataValidators {
         }
     }
 
-    static Email(message: string = "پست الکترونیک وارد شده معتبر نمی باشد") {
+    static Email(message: string = "پست الکترونیک معتبر نمی باشد") {
         return function (target: any, property: string | symbol) {
             const data: DataValidator = {
                 key: "email",
@@ -101,19 +115,20 @@ export class DataValidators {
         }
     }
 
-    static Phone(message: string = "شماره همراه وارد شده معتبر نمی باشد") {
+    static LengthValidator(strLength: number, message: string = "شماره همراه معتبر نمی باشد") {
         return function (target: any, property: string | symbol) {
             const data: DataValidator = {
                 key: "phone",
                 context: target.constructor,
                 property,
                 message,
+                validator: new LengthValidator(strLength, message)
             };
             DataValidatorManager.Add(data);
         }
     }
 
-    static Mobile(message: string = "شماره همراه وارد شده معتبر نمی باشد") {
+    static Mobile(message: string = "شماره همراه معتبر نمی باشد") {
         return function (target: any, property: string | symbol) {
             const data: DataValidator = {
                 key: "mobile",
@@ -126,7 +141,7 @@ export class DataValidators {
         }
     }
 
-    static Url(message: string = "پیوند وارد شده نامعتبر می باشد") {
+    static Url(message: string = "پیوند نامعتبر می باشد") {
         return function (target: any, property: string | symbol) {
             const data: DataValidator = {
                 key: "url",
@@ -139,19 +154,20 @@ export class DataValidators {
         }
     }
 
-    static PostalCode(message: string = "کدپستی وارد شده نامعتبر می باشد") {
+    static PostalCode(message: string = "کدپستی نامعتبر می باشد") {
         return function (target: any, property: string | symbol) {
             const data: DataValidator = {
                 key: "postalCode",
                 context: target.constructor,
                 property,
                 message,
+                validator: new PostalCodeValidator(message)
             };
             DataValidatorManager.Add(data);
         }
     }
 
-    static MeliCode(message: string = "کدملی وارد شده نامعتبر می باشد") {
+    static MeliCode(message: string = "کدملی نامعتبر می باشد") {
         return function (target: any, property: string | symbol) {
             const data: DataValidator = {
                 key: "meliCode",
@@ -163,7 +179,6 @@ export class DataValidators {
             DataValidatorManager.Add(data);
         }
     }
-
 }
 
 

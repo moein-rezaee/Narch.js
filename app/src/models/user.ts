@@ -7,7 +7,6 @@ const {
     Range,
     Compare,
     Email,
-    Phone,
     Mobile,
     Url,
     PostalCode,
@@ -16,6 +15,7 @@ const {
 
 export class User {
     @Require()
+    @Title("شناسه")
     id: string = "";
     
     @Require()
@@ -36,7 +36,6 @@ export class User {
     @Email()
     email: string = "";
     
-    @Title("کدملی")
     @MeliCode()
     meliCode: string = "";
     
@@ -47,10 +46,6 @@ export class User {
     @Title("امتیاز")
     @Range(10, 20)
     point: number = 0;
-    
-    @Title("شماره منزل")
-    @Phone()
-    phone: string = "";
     
     @Mobile()
     mobile: string = "";
