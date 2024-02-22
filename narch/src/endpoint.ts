@@ -1,5 +1,5 @@
 import { IEndpoint, IPatternMatcher, IRouter } from "./interfaces.js";
-import { FieldDecoratorType, MatchedDetail, MatchedPattern } from "./types.js";
+import { Action, FieldDecoratorType, MatchedDetail, MatchedPattern } from "./types.js";
 import Router from "./router/index.js";
 import { PatternMatcher } from "./router/pattern-handler/patternMatcher";
 
@@ -13,23 +13,25 @@ class Endpoint implements IEndpoint {
   }
 
   public execute(data: any = null, files: any = null) {
-    const endpoint = this.findMatchEndpoint();
+    const endpoint: Action = this.findMatchEndpoint();
     const values = this.getArgsValue(endpoint.action.args);
     if (data) {
 
       const validateResult = endpoint.modelValidator.validate(data);
-      return endpoint.action.instance.call(endpoint.context.instance, ...[data, files]);
+      const modelInstance: any = endpoint.modelValidator.modelInstance;
+      modelInstance.isValid = () => validateResult;
+      return endpoint.action.instance.call(endpoint.context.instance, ...[modelInstance, files]);
     } else
       return endpoint.action.instance.call(endpoint.context.instance, ...values);
   }
 
-  private findAllMatches() {
+  private findAllMatches(): Array<Action> {
     const { actions } = new Router() as IRouter;
-    return actions.filter((i: any) => i.url.pattern == this.matchPattern.value);
+    return actions.filter((i: Action) => i.url.pattern == this.matchPattern.value);
   }
 
-  private findMatchEndpoint() {
-    const endPoints = this.findAllMatches();
+  private findMatchEndpoint(): Action {
+    const endPoints: Array<Action> = this.findAllMatches();
     if (endPoints?.length > 1) {
       throw "more than one end point mathch founded!";
     } else if (endPoints?.length == 1) {

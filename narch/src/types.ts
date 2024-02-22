@@ -1,10 +1,23 @@
+import { ModelValidator } from "./validators/modelValidator"
+
 export type FieldDecoratorType = {
     key: string,
-    context: any, 
-    property: string | symbol, 
+    context: any,
+    property: string | symbol,
     message?: string,
     value?: number | any | string,
     validator?: any
+}
+
+
+export type Action = {
+    isController: boolean,
+    context: any,
+    method: string,
+    decorator: RouterMethod,
+    modelValidator: ModelValidator,
+    action: any,
+    url: any,
 }
 
 export type RoutesData = {

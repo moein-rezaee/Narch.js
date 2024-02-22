@@ -9,13 +9,13 @@ export class FieldDecorator {
                 key: "title",
                 context: target.constructor,
                 property,
-                value: title ?? property,
+                value: title,
             }
             FieldDecoratorManager.Add(data);
         }
     }
 
-    static Require(message: string = "وارد کردن فیلد اجباری می باشد") {
+    static Require(message: string = "وارد کردن [field] اجباری می باشد") {
         return function (target: any, property: string | symbol) {
             const data: FieldDecoratorType = {
                 key: "require",
@@ -28,7 +28,7 @@ export class FieldDecorator {
         }
     }
 
-    static MaxLength(max: number, message: string = "طول فیلد بیشتر از حد مجاز می باشد") {
+    static MaxLength(max: number, message: string = "طول فیلد [field] بیشتر از حد مجاز می باشد") {
         return function (target: any, property: string | symbol) {
             const data: FieldDecoratorType = {
                 key: "max",

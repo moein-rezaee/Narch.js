@@ -1,8 +1,8 @@
-import { MatchedPattern, Pattern, RoutesData } from "./types.js";
+import { Action, MatchedPattern, Pattern, RoutesData } from "./types.js";
 
 export interface IRouter {
     get routesData(): RoutesData;
-    get actions(): Array<any>;
+    get actions(): Array<Action>;
     get controllers(): Array<any>;
     get patterns(): Array<Pattern>;
 }
