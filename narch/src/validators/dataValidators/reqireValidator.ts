@@ -1,12 +1,8 @@
-export class RequireValidator {
+import { BaseDataValidator } from "./baseDataValidator";
 
-    private _message: string = "";
+export class RequireValidator extends BaseDataValidator {
     constructor(message: string) {
-        this._message = message;
-    }
-
-    get message(): string {
-        return this._message;
+        super(message);
     }
 
     validate(field: any): boolean {

@@ -1,14 +1,10 @@
+import { BaseDataValidator } from "./baseDataValidator";
 
-export class MinLengthValidator {
-    private _message: string = "";
+export class MinLengthValidator extends BaseDataValidator {
     private minLength: number = 0;
     constructor(minLength: number, message: string) {
+        super(message);
         this.minLength = minLength;
-        this._message = message;
-    }
-
-    get message(): string {
-        return this._message;
     }
 
     validate(field?: string): boolean {

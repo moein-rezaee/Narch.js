@@ -1,14 +1,10 @@
+import { BaseDataValidator } from "./baseDataValidator";
 
-export class RangeValidator {
-    private _message: string = "";
+export class RangeValidator extends BaseDataValidator {
     private _value: any;
     constructor(value: any, message: string) {
-        this._message = message;
+        super(message);
         this._value = value;
-    }
-
-    get message(): string {
-        return this._message;
     }
 
     get end(): number {

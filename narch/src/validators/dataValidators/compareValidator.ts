@@ -1,14 +1,10 @@
+import { BaseDataValidator } from "./baseDataValidator";
 
-export class CompareValidator {
-    private _message: string = "";
+export class CompareValidator extends BaseDataValidator {
     private _otherProp: string = "";
     constructor(otherProp: string, message: string) {
-        this._message = message;
+        super(message);
         this._otherProp = otherProp;
-    }
-
-    get message(): string {
-        return this._message;
     }
 
     get otherProp(): string {

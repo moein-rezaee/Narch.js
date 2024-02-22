@@ -1,12 +1,8 @@
+import { BaseDataValidator } from "./baseDataValidator";
 
-export class MobileValidator {
-    private _message: string = "";
+export class MobileValidator extends BaseDataValidator {
     constructor(message: string) {
-        this._message = message;
-    }
-
-    get message(): string {
-        return this._message;
+        super(message);
     }
 
     validate(field?: string): boolean {
