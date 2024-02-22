@@ -1,7 +1,7 @@
 import { IRouter } from "../interfaces";
 import { Pattern, RoutesData } from "../types";
+import { ActionRouter } from "./actionRouter";
 
-import ActionRouter from "./actionRouter";
 import ControllerRouter from "./controllerRouter";
 
 

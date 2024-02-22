@@ -3,7 +3,7 @@ import { Action, RouterMethod } from "../types";
 
 const ActionUrlGenerator = require("./url-generator/actionUrlGenerator");
 const { RouterDecoratorManager } = require("../decorators/routerDecorator/manager");
-module.exports = class ActionRouter {
+export class ActionRouter {
   generate(controllerRoute: any, func: Function) {
     this.foreach(controllerRoute.controller, (action: any, { modelValidator, routerMethod }: any) => {
       const info = {

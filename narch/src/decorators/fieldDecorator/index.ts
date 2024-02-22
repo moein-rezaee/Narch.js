@@ -28,8 +28,9 @@ export class FieldDecorator {
         }
     }
 
-    static MaxLength(max: number, message: string = "طول فیلد [field] بیشتر از حد مجاز می باشد") {
+    static MaxLength(max: number, message: string = "طول فیلد باید کمتر از [max] می باشد") {
         return function (target: any, property: string | symbol) {
+            message = message.replace("[max]", max.toString());
             const data: FieldDecoratorType = {
                 key: "maxLength",
                 context: target.constructor,
@@ -41,9 +42,9 @@ export class FieldDecorator {
             FieldDecoratorManager.Add(data);
         }
     }
-
-    static MinLength(min: number, message: string = "طول فیلد [field] کمتر از حد مجاز می باشد") {
+    static MinLength(min: number, message: string = "طول فیلد [field] باید بیشتر از [min] کاراکتر باشد") {
         return function (target: any, property: string | symbol) {
+            message = message.replace("[min]", min.toString());
             const data: FieldDecoratorType = {
                 key: "minLength",
                 context: target.constructor,
@@ -55,9 +56,9 @@ export class FieldDecorator {
             FieldDecoratorManager.Add(data);
         }
     }
-
-    static Length(strLength: number, message: string = "طول فیلد [field] غیرمجاز می باشد") {
+    static Length(strLength: number, message: string = "طول فیلد [field] باید برابر [length] باشد") {
         return function (target: any, property: string | symbol) {
+            message = message.replace("[length]", strLength.toString());
             const data: FieldDecoratorType = {
                 key: "stringLength",
                 context: target.constructor,
@@ -84,7 +85,6 @@ export class FieldDecorator {
             FieldDecoratorManager.Add(data);
         }
     }
-
     static Min(value: number, message: string = "مقدار عدد وارد شده در فیلد [field] باید مقداری بیشتر از [min] باشد.") {
         return function (target: any, property: string | symbol) {
             message = message.replace("[min]", value.toString());
@@ -99,7 +99,6 @@ export class FieldDecorator {
             FieldDecoratorManager.Add(data);
         }
     }
-
     static Range(startNum: number, endNum: number, message: string = "عداد وارد شده در فیلد [field] باید رقمی بین [max] و [min] باشد") {
         return function (target: any, property: string | symbol) {
             const value = {
@@ -119,7 +118,7 @@ export class FieldDecorator {
         }
     }
 
-    static Compare(otherProp: string, message: string = "مقادیر این [field] با فیلد مقایسه شده برابر نمی باشد") {
+    static Compare(otherProp: string, message: string = "مقادیر فیلد [field] با فیلد مقایسه شده برابر نمی باشد") {
         return function (target: any, property: string | symbol) {
             const data: FieldDecoratorType = {
                 key: "compare",
@@ -141,19 +140,6 @@ export class FieldDecorator {
                 property,
                 message,
                 validator: new EmailValidator(message)
-            };
-            FieldDecoratorManager.Add(data);
-        }
-    }
-
-    static LengthValidator(strLength: number, message: string = "طولل [field] وارد شده معتبر نمی باشد") {
-        return function (target: any, property: string | symbol) {
-            const data: FieldDecoratorType = {
-                key: "stringLength",
-                context: target.constructor,
-                property,
-                message,
-                validator: new LengthValidator(strLength, message)
             };
             FieldDecoratorManager.Add(data);
         }

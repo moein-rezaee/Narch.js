@@ -36,7 +36,8 @@ export class ModelValidator {
                     if (key == prop) {
                         key = "format";
                     }
-                    else if (key == "compare") {
+                    
+                    if (key == "compare") {
                         const otherProp: string = dataValidator.validator.otherProp;
                         if (validatorResult[prop]) {
                             validatorResult[prop][key] = {

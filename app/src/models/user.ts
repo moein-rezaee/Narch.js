@@ -13,6 +13,7 @@ const {
     MeliCode,
     Max,
     Min,
+    Length,
  } = FieldDecorator;
 
 export class User {
@@ -52,6 +53,7 @@ export class User {
     point: number = 0;
     
     @Mobile()
+    @Length(10)
     mobile: string = "";
     
     @PostalCode()
