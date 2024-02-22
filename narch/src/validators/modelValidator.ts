@@ -22,35 +22,49 @@ export class ModelValidator {
                 const dataValidators: Array<FieldDecoratorType> = propValidators[prop].dataValidator;
                 const field = data[prop];
                 this.modelInstance[prop] = field ?? null;
-                
+
                 const titleDecorator: FieldDecoratorType | undefined = dataValidators.find((i: FieldDecoratorType) => i.key == "title");
                 let title: string = titleDecorator?.value;
-                if(!title || title === "") {
+                if (!title || title === "") {
                     title = prop;
                 }
-                
+
                 const validators: Array<FieldDecoratorType> = dataValidators.filter((i: FieldDecoratorType) => i.key != "title");
                 validators.forEach((dataValidator: FieldDecoratorType) => {
                     dataValidator.validator.title = title;
-
-
-                    const key = dataValidator.key;
-                    if (key == "title") {
-                        title = dataValidator.value as string;
+                    let key = dataValidator.key;
+                    if (key == prop) {
+                        key = "format";
                     }
                     else if (key == "compare") {
                         const otherProp: string = dataValidator.validator.otherProp;
                         if (validatorResult[prop]) {
-                            validatorResult[prop][key] = dataValidator.validator.validate(field, data[otherProp]);
+                            validatorResult[prop][key] = {
+                                result: dataValidator.validator.validate(field, data[otherProp]),
+                                errorMessage: dataValidator.validator.message
+                            }
                         } else {
-                            validatorResult[prop] = { [key]: dataValidator.validator.validate(field, data[otherProp]) };
+                            validatorResult[prop] = {
+                                [key]: {
+                                    result: dataValidator.validator.validate(field, data[otherProp]),
+                                    errorMessage: dataValidator.validator.message
+                                }
+                            };
                         }
                     }
                     else {
                         if (validatorResult[prop]) {
-                            validatorResult[prop][key] = dataValidator.validator.validate(field);
+                            validatorResult[prop][key] = {
+                                result: dataValidator.validator.validate(field),
+                                errorMessage: dataValidator.validator.message
+                            };
                         } else {
-                            validatorResult[prop] = { [key]: dataValidator.validator.validate(field) };
+                            validatorResult[prop] = {
+                                [key]: {
+                                    result: dataValidator.validator.validate(field),
+                                    errorMessage: dataValidator.validator.message
+                                }
+                            };
                         }
                     }
                 });

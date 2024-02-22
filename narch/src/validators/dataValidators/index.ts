@@ -9,6 +9,8 @@ import { PostalCodeValidator } from "./postalCodeValidator";
 import { RangeValidator } from "./rangeValidator";
 import { RequireValidator } from "./reqireValidator";
 import { UrlValidator } from "./urlValidator";
+import { MaxValidator } from "./maxValidator";
+import { MinValidator } from "./minValidator";
 
 export {
     RequireValidator,
@@ -21,5 +23,7 @@ export {
     RangeValidator,
     MaxLengthValidator,
     MinLengthValidator,
-    LengthValidator
+    LengthValidator,
+    MaxValidator,
+    MinValidator,
 }

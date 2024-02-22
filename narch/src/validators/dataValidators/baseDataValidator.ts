@@ -7,7 +7,7 @@ export class BaseDataValidator {
     }
 
     get message(): string {
-        return this._message;
+        return this._message.replace("[field]", this._title);
     }
 
     set title(value: string) {

@@ -1,5 +1,5 @@
 import { FieldDecoratorType } from "../../types";
-import { CompareValidator, EmailValidator, LengthValidator, MaxLengthValidator, MeliCodeValidator, MinLengthValidator, MobileValidator, PostalCodeValidator, RangeValidator, RequireValidator, UrlValidator } from "../../validators/dataValidators";
+import { CompareValidator, EmailValidator, LengthValidator, MaxLengthValidator, MeliCodeValidator, MinLengthValidator, MobileValidator, PostalCodeValidator, RangeValidator, RequireValidator, UrlValidator, MaxValidator, MinValidator } from "../../validators/dataValidators";
 import { FieldDecoratorManager } from "./manager";
 
 export class FieldDecorator {
@@ -31,7 +31,7 @@ export class FieldDecorator {
     static MaxLength(max: number, message: string = "طول فیلد [field] بیشتر از حد مجاز می باشد") {
         return function (target: any, property: string | symbol) {
             const data: FieldDecoratorType = {
-                key: "max",
+                key: "maxLength",
                 context: target.constructor,
                 property,
                 message,
@@ -42,10 +42,10 @@ export class FieldDecorator {
         }
     }
 
-    static MinLength(min: number, message: string = "طول فیلد کمتر از حد مجاز می باشد") {
+    static MinLength(min: number, message: string = "طول فیلد [field] کمتر از حد مجاز می باشد") {
         return function (target: any, property: string | symbol) {
             const data: FieldDecoratorType = {
-                key: "min",
+                key: "minLength",
                 context: target.constructor,
                 property,
                 message,
@@ -56,10 +56,10 @@ export class FieldDecorator {
         }
     }
 
-    static Length(strLength: number, message: string = "طول فیلد غیرمجاز می باشد") {
+    static Length(strLength: number, message: string = "طول فیلد [field] غیرمجاز می باشد") {
         return function (target: any, property: string | symbol) {
             const data: FieldDecoratorType = {
-                key: "min",
+                key: "stringLength",
                 context: target.constructor,
                 property,
                 message,
@@ -70,12 +70,43 @@ export class FieldDecorator {
         }
     }
 
-    static Range(startNum: number, endNum: number, message: string = "عدد معتبر نمی باشد") {
+    static Max(value: number, message: string = "مقدار عدد وارد شده در فیلد [field] باید مقداری کمتر از [max] باشد.") {
+        return function (target: any, property: string | symbol) {
+            message = message.replace("[max]", value.toString());
+            const data: FieldDecoratorType = {
+                key: "max",
+                context: target.constructor,
+                property,
+                message,
+                value,
+                validator: new MaxValidator(value, message)
+            }
+            FieldDecoratorManager.Add(data);
+        }
+    }
+
+    static Min(value: number, message: string = "مقدار عدد وارد شده در فیلد [field] باید مقداری بیشتر از [min] باشد.") {
+        return function (target: any, property: string | symbol) {
+            message = message.replace("[min]", value.toString());
+            const data: FieldDecoratorType = {
+                key: "min",
+                context: target.constructor,
+                property,
+                message,
+                value,
+                validator: new MinValidator(value, message)
+            }
+            FieldDecoratorManager.Add(data);
+        }
+    }
+
+    static Range(startNum: number, endNum: number, message: string = "عداد وارد شده در فیلد [field] باید رقمی بین [max] و [min] باشد") {
         return function (target: any, property: string | symbol) {
             const value = {
                 startNum,
                 endNum
             }
+            message = message.replace("[max]", value.endNum.toString()).replace("[min]", value.startNum.toString())
             const data: FieldDecoratorType = {
                 key: "range",
                 context: target.constructor,
@@ -88,7 +119,7 @@ export class FieldDecorator {
         }
     }
 
-    static Compare(otherProp: string, message: string = "مقادیر این فیلد با فیلد مقایسه شده برابر نمی باشد") {
+    static Compare(otherProp: string, message: string = "مقادیر این [field] با فیلد مقایسه شده برابر نمی باشد") {
         return function (target: any, property: string | symbol) {
             const data: FieldDecoratorType = {
                 key: "compare",
@@ -115,10 +146,10 @@ export class FieldDecorator {
         }
     }
 
-    static LengthValidator(strLength: number, message: string = "شماره همراه معتبر نمی باشد") {
+    static LengthValidator(strLength: number, message: string = "طولل [field] وارد شده معتبر نمی باشد") {
         return function (target: any, property: string | symbol) {
             const data: FieldDecoratorType = {
-                key: "phone",
+                key: "stringLength",
                 context: target.constructor,
                 property,
                 message,
