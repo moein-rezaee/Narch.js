@@ -11,6 +11,8 @@ const {
     Url,
     PostalCode,
     MeliCode,
+    Max,
+    Min,
  } = FieldDecorator;
 
 export class User {
@@ -45,6 +47,8 @@ export class User {
     
     @Title("امتیاز")
     @Range(10, 20)
+    @Max(20)
+    @Min(10)
     point: number = 0;
     
     @Mobile()
