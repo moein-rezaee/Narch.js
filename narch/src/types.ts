@@ -91,3 +91,14 @@ export type ModelDecoratorType = {
     context: ContextInfo,
     funcName: string | symbol
 }
+
+export type ValidateObject = {
+    prop: string,
+    data: any,
+    dataValidator: FieldDecoratorType
+}
+
+export type ValidateResultType = {
+    result: boolean,
+    errorMessage: string
+}

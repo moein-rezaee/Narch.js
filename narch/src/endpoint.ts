@@ -16,10 +16,7 @@ class Endpoint implements IEndpoint {
     const endpoint: Action = this.findMatchEndpoint();
     const values = this.getArgsValue(endpoint.action.args);
     if (data) {
-
-      const validateResult = endpoint.modelValidator.validate(data);
-      const modelInstance: any = endpoint.modelValidator.modelInstance;
-      modelInstance.isValid = () => validateResult;
+      const modelInstance: any = endpoint.modelValidator.getModelInstance(data);
       return endpoint.action.instance.call(endpoint.context.instance, ...[modelInstance, files]);
     } else
       return endpoint.action.instance.call(endpoint.context.instance, ...values);

@@ -1,5 +1,6 @@
 import { ModelDecoratorManager } from "../decorators/modelDecorator/manager";
-import { FieldDecoratorType, ModelDecoratorType } from "../types";
+import { ModelDecoratorType } from "./../types";
+import { ModelInitializer } from "./ModelInitializer";
 import { PropValidator } from "./propValidator";
 
 export class ModelValidator {
@@ -9,81 +10,16 @@ export class ModelValidator {
     constructor(controllerName: string, funcName: string) {
         this._model = this.findModel(controllerName, funcName);
         if (this._model) {
-            this._modelInstance = new this._model.entity()
+            this._modelInstance = new this._model.entity();
             this.setPropValidators();
         }
     }
 
-    public validate(data: any): any {
-        const validatorResult: any = {}
-        const propValidators = this.propValidators;
-        if (propValidators) {
-            Object.keys(propValidators).forEach(prop => {
-                const dataValidators: Array<FieldDecoratorType> = propValidators[prop].dataValidator;
-                const field = data[prop];
-                this.modelInstance[prop] = field ?? null;
-
-                const titleDecorator: FieldDecoratorType | undefined = dataValidators.find((i: FieldDecoratorType) => i.key == "title");
-                let title: string = titleDecorator?.value;
-                if (!title || title === "") {
-                    title = prop;
-                }
-
-                const validators: Array<FieldDecoratorType> = dataValidators.filter((i: FieldDecoratorType) => i.key != "title");
-                validators.forEach((dataValidator: FieldDecoratorType) => {
-                    dataValidator.validator.title = title;
-                    let key = dataValidator.key;
-                    if (key == prop) {
-                        key = "format";
-                    }
-                    
-                    if (key == "compare") {
-                        const otherProp: string = dataValidator.validator.otherProp;
-                        if (validatorResult[prop]) {
-                            validatorResult[prop][key] = {
-                                result: dataValidator.validator.validate(field, data[otherProp]),
-                                errorMessage: dataValidator.validator.message
-                            }
-                        } else {
-                            validatorResult[prop] = {
-                                [key]: {
-                                    result: dataValidator.validator.validate(field, data[otherProp]),
-                                    errorMessage: dataValidator.validator.message
-                                }
-                            };
-                        }
-                    }
-                    else {
-                        if (validatorResult[prop]) {
-                            validatorResult[prop][key] = {
-                                result: dataValidator.validator.validate(field),
-                                errorMessage: dataValidator.validator.message
-                            };
-                        } else {
-                            validatorResult[prop] = {
-                                [key]: {
-                                    result: dataValidator.validator.validate(field),
-                                    errorMessage: dataValidator.validator.message
-                                }
-                            };
-                        }
-                    }
-                });
-            });
-        }
-        return validatorResult;
-    }
-
-    get model(): ModelDecoratorType | undefined {
-        return this._model;
-    }
-
-    get modelInstance(): any {
-        return this._modelInstance;
-    }
-
-    get propValidators(): any {
-        return this._propValidators;
+    public getModelInstance(data: any): any {
+        if (this._model) {
+            const modelInitializer: ModelInitializer = new ModelInitializer(this._propValidators, this._modelInstance);
+            return modelInitializer.initialize(data);
+        } else return data;
     }
 
     private findModel(controllerName: string, funcName: string): ModelDecoratorType | undefined {
@@ -98,11 +34,11 @@ export class ModelValidator {
     }
 
     private addProp(prop: string) {
-        this._propValidators[prop] = new PropValidator(prop, this.modelInstance);
+        this._propValidators[prop] = new PropValidator(prop, this._modelInstance);
     }
 
     private inProps(callback: Function) {
-        Object.keys(this.modelInstance).forEach((prop) => {
+        Object.keys(this._modelInstance).forEach((prop) => {
             callback(prop);
         });
     }
