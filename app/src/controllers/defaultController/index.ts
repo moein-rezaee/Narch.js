@@ -3,6 +3,7 @@ const { Put, Post, Delete, Get, Route } = RouterDecorator;
 
 import { User } from '../../models/user';
 import { ModelDecorator } from 'narch/src/decorators/modelDecorator';
+import { Blog } from '../../models/blog';
 const { Model } = ModelDecorator;
 
 @Route("blogs")
@@ -19,8 +20,9 @@ class defaultController {
 
   @Post()
   @Model(User)
-  add(user: User, files: any): any {  
-    return { user, files };
+  @Model(Blog)
+  add(user: User, blog: Blog, files: any): any {  
+    return { user, files, blog };
   }
 
   @Put()
