@@ -20,7 +20,6 @@ class defaultController {
 
   @Post()
   @Model(User)
-  @Model(Blog)
   add(user: User, blog: Blog, files: any): any {  
     return { user, files, blog };
   }
