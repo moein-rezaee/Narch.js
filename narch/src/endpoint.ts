@@ -7,13 +7,19 @@ import { PatternMatcher } from "./router/pattern-handler/patternMatcher";
 class Endpoint implements IEndpoint {
   private patternMatcher: IPatternMatcher;
   private matchPattern: MatchedPattern;
+  private _endpoint: Action;
   constructor(url: string, method: string) {
     this.patternMatcher = new PatternMatcher(url, method);
     this.matchPattern = this.patternMatcher.findeMatchPattern();
+    this._endpoint = this.findMatchEndpoint();
+  }
+
+  get info() {
+    return this._endpoint;
   }
 
   public execute(data: any = null, files: any = null) {
-    const endpoint: Action = this.findMatchEndpoint();
+    const endpoint = this.info;
     const values = this.getArgsValue(endpoint.action.args);
     if (data) {
       const modelInstance: any = endpoint.modelValidator.getModelInstance(data);

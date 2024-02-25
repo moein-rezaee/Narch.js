@@ -1,3 +1,4 @@
+import { FilesValidator } from "./validators/filesValidator"
 import { ModelValidator } from "./validators/modelValidator"
 
 export type FieldDecoratorType = {
@@ -16,6 +17,7 @@ export type Action = {
     method: string,
     decorator: RouterMethod,
     modelValidator: ModelValidator,
+    filesValidator: FilesValidator,
     action: any,
     url: any,
 }
@@ -69,9 +71,9 @@ export type RouterMethod = {
 export type FileInfo = {
     data: any,
     fieldName: string,
-    size: number,
     filename: string,
     mimeType: string,
+    size?: number,
 }
 
 export type FileDataInfo = {
@@ -101,4 +103,21 @@ export type ValidateObject = {
 export type ValidateResultType = {
     result: boolean,
     errorMessage: string
+}
+
+
+export type FormFilesDecoratorType = {
+    files: Array<FormFileType>,
+    context: ContextInfo,
+    funcName: string | symbol
+}
+
+
+export type FormFileType = {
+    fieldName: string;
+    saveTo: string;
+    validMimeTypes: Array<string>;
+    validSizeInMB: number;
+    validFilesCount?: number;
+    isRequire?: boolean,
 }

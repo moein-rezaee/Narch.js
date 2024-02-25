@@ -1,5 +1,7 @@
+import { FilesValidator } from './validators/filesValidator';
 import Endpoint from "./endpoint.js";
 import { FormManager } from "./formManager.js";
+import { Action } from "./types.js";
 
 export class RequestManager {
   req: any;
@@ -20,8 +22,8 @@ export class RequestManager {
     await self[method].call(self);
   }
 
-  private async parseForm(): Promise<any> {
-    const formManager = new FormManager();
+  private async parseForm(filesValidator: FilesValidator): Promise<any> {
+    const formManager = new FormManager(filesValidator);
     return await formManager.parse(this.req);
   }
 
@@ -32,7 +34,11 @@ export class RequestManager {
 
   private async runByFormData() {
     const endpoint = this.getEndPoint();
-    const { files, data } = await this.parseForm();
+    const endpointInfo: Action = endpoint.info; 
+
+
+
+    const { files, data } = await this.parseForm(endpoint.info.filesValidator);
     const result = endpoint.execute(data, files);
     this.res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
     this.res.end(JSON.stringify(result));

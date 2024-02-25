@@ -1,4 +1,4 @@
-import { FieldDecoratorType } from './../../types';
+import { FieldDecoratorType, FormFilesDecoratorType } from './../../types';
 export class FieldDecoratorManager {
     static Decorators: Array<FieldDecoratorType> = [];
 

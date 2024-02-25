@@ -1,10 +1,14 @@
 import { RouterDecorator } from 'narch/src/decorators/routerDecorator';
-const { Put, Post, Delete, Get, Route } = RouterDecorator;
-
-import { User } from '../../models/user';
 import { ModelDecorator } from 'narch/src/decorators/modelDecorator';
-import { Blog } from '../../models/blog';
+import { FormFilesDecorator } from 'narch/src/decorators/formFilesDecorator';
+
+const { Put, Post, Delete, Get, Route } = RouterDecorator;
 const { Model } = ModelDecorator;
+const { FormFiles } = FormFilesDecorator;
+
+import { Blog } from '../../models/blog';
+import { User } from '../../models/user';
+import { MeliCode, Profile } from '../../filesSchemas';
 
 @Route("blogs")
 class defaultController {
@@ -20,6 +24,7 @@ class defaultController {
 
   @Post()
   @Model(User)
+  @FormFiles(MeliCode, Profile)
   add(user: User, blog: Blog, files: any): any {  
     return { user, files, blog };
   }

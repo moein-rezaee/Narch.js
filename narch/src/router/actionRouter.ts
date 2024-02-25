@@ -1,14 +1,16 @@
 import { ModelValidator } from './../validators/modelValidator';
 import { Action, RouterMethod } from "../types";
+import { FilesValidator } from '../validators/filesValidator';
 
 const ActionUrlGenerator = require("./url-generator/actionUrlGenerator");
 const { RouterDecoratorManager } = require("../decorators/routerDecorator/manager");
 export class ActionRouter {
   generate(controllerRoute: any, func: Function) {
-    this.foreach(controllerRoute.controller, (action: any, { modelValidator, routerMethod }: any) => {
+    this.foreach(controllerRoute.controller, (action: any, { modelValidator, routerMethod, filesValidator }: any) => {
       const info = {
         decorator: routerMethod,
         modelValidator,
+        filesValidator,
         controllerRoute,
         action,
       };
@@ -24,12 +26,13 @@ export class ActionRouter {
       const method = methods[name];
       const routerMethod: RouterMethod = this.decorator(controller.name, name);
       const modelValidator: ModelValidator = this.model(controller.name, name);
-      if (func) func(method, { modelValidator, routerMethod });
+      const filesValidator: FilesValidator = this.filesValidator(controller.name, name);
+      if (func) func(method, { modelValidator, routerMethod, filesValidator });
     }
   }
 
   route(info: any) {
-    const { controllerRoute, action, decorator, modelValidator } = info;
+    const { controllerRoute, action, decorator, modelValidator, filesValidator } = info;
     const url = this.url(info);
     return {
       isController: false,
@@ -37,6 +40,7 @@ export class ActionRouter {
       method: decorator?.method ?? "GET",
       decorator,
       modelValidator,
+      filesValidator,
       action,
       url,
     } as Action;
@@ -50,6 +54,10 @@ export class ActionRouter {
 
   model(controllerName: string, funcName: string): ModelValidator {
     return new ModelValidator(controllerName, funcName)
+  }
+
+  filesValidator(controllerName: string, funcName: string): FilesValidator {
+    return new FilesValidator(controllerName, funcName)
   }
 
   url(info: any) {

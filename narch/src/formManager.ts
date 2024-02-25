@@ -1,15 +1,21 @@
 const busboy = require('busboy');
-import { FileData } from "./fileData.js";
+import { RequestFilesHandler } from "./requestFilesHandler.js";
 import { FileInfo } from "./types.js";
+import { FileEventHandler } from "./fileEventHandler.js";
+import { FilesValidator } from "./validators/filesValidator.js";
 
 
 export class FormManager {
-  data: any;
-  files: any;
+  private _data: any;
+  private _reqFilesHandler: RequestFilesHandler;
+  constructor(filesValidator: FilesValidator) {
+    this._data = {};
+    this._reqFilesHandler = this.getRequestFileHandler(filesValidator);
+  }
 
-  constructor() {
-    this.data = {};
-    this.files = {};
+  private getRequestFileHandler(filesValidator: FilesValidator) {
+    const fileEventHandler = new FileEventHandler(filesValidator);
+    return new RequestFilesHandler(fileEventHandler);
   }
 
   public async parse(req: any) {
@@ -31,27 +37,33 @@ export class FormManager {
 
   private bindEvents(parser: any, resolve: Function) {
     const self = this;
-    const { data, files } = self;
     parser.on("field", (name: string, val: any) => self.field.call(self, name, val));
     parser.on("file", async (name: string, data: any, info: any) => self.file.call(self, name, data, info));
-    parser.on("close", () => resolve({ data, files }));
+    parser.on("close", () => {
+      const files: any = self._reqFilesHandler.callClose();
+      const from = { 
+        data: self._data, 
+        files 
+      };  
+      resolve(from);
+    });
   }
 
   private field(name: string, val: any): void {
-    this.data[name] = val;
+    this._data[name] = val;
   }
 
-  private async file(name: string, data: any, { filename, mimeType }: any): Promise<void> {
+  private async file(name: string, file: any, { filename, mimeType }: any): Promise<void> {
     // TODO: if filename.isExist() and is validate then add file
-    let size: number = await this.recivedFile(data);
     const fileInfo: FileInfo = {
-      data,
+      data: file,
       fieldName: name,
-      size,
       filename,
       mimeType,
     };
-    this.addFile(fileInfo);
+    
+    this._reqFilesHandler.callReceive(fileInfo);
+    await this.recivedFile(file);
   }
 
   private async recivedFile(file: any): Promise<number> {
@@ -60,26 +72,19 @@ export class FormManager {
       try {
         file.on('data', (chunk: string) => {
           size += chunk.length;
+          const resume: boolean = this._reqFilesHandler.callStream(chunk, size);
+          console.log(resume);
           // TODO
           // if(fileSize > ) 
           //   req.unpipe(busboy);
           //   res.status(500).end('Limit Reached');
-        }).on('close', () => resolve(size));
+        }).on('close', () => {
+          this._reqFilesHandler.callEndStream(size);
+          resolve(size);
+        });
       } catch (err) {
         reject(err);
       }
     });
-  }
-
-
-  addFile(i: FileInfo): void {
-    //TODO: count of fileData
-    const { fieldName: name } = i;
-    const fileData: FileData = new FileData(i);
-    if (this.files[name] && this.files[name].length > 0) {
-      this.files[name].push(fileData);
-    } else {
-      this.files[name] = [fileData];
-    }
   }
 }
