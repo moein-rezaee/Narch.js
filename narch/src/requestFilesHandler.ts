@@ -17,12 +17,12 @@ export class RequestFilesHandler {
     this._event?.addListener("onClose", fileEventHandler.onClose.bind(fileEventHandler));
   }
 
-  public callReceive(fileInfo: FileInfo): boolean {
-    return this._event?.emit("onReceive", fileInfo) as boolean;
+  public callReceive(fileInfo: FileInfo): void {
+    this._event?.emit("onReceive", fileInfo) as boolean;
   }
 
-  public callStream(chunck: string, size: number): boolean {
-    return this._event?.emit("onStream", chunck, size) as boolean;
+  public callStream(chunck: string, size: number): void {
+    this._event?.emit("onStream", chunck, size);
   }
   public callEndStream(size: number): void {
     this._event?.emit("onEndStream", size);

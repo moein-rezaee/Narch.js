@@ -72,12 +72,7 @@ export class FormManager {
       try {
         file.on('data', (chunk: string) => {
           size += chunk.length;
-          const resume: boolean = this._reqFilesHandler.callStream(chunk, size);
-          console.log(resume);
-          // TODO
-          // if(fileSize > ) 
-          //   req.unpipe(busboy);
-          //   res.status(500).end('Limit Reached');
+          this._reqFilesHandler.callStream(chunk, size);
         }).on('close', () => {
           this._reqFilesHandler.callEndStream(size);
           resolve(size);

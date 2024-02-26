@@ -22,7 +22,8 @@ export class FileData {
     return filenameParts[lastIndex];
   }
 
-  private getFileSizeByUnits(size: number): any {
+  private getFileSizeByUnits(size?: number): any {
+    if(!size) throw "file size not set"
     return {
       byte: size,
       kilobyte: this.getSizeToKB(size),

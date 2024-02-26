@@ -107,17 +107,23 @@ export type ValidateResultType = {
 
 
 export type FormFilesDecoratorType = {
-    files: Array<FormFileType>,
+        files: Array<FormFileType>,
     context: ContextInfo,
     funcName: string | symbol
 }
 
 
 export type FormFileType = {
+    key: string;
     fieldName: string;
     saveTo: string;
     validMimeTypes: Array<string>;
     validSizeInMB: number;
-    validFilesCount?: number;
+    validFilesCount?: FileCount;
     isRequire?: boolean,
+}
+
+export type FileCount = {
+    isEqual?: boolean,
+    value: number  
 }
