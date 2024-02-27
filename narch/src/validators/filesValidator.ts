@@ -38,17 +38,24 @@ export class FilesValidator {
 
     public validateFilesCount(files: any) {
         this.schemaValidations?.files.forEach((schema: FormFileType) => {
-            const validCount = schema.validFilesCount?.value ?? 1;
-            const isEqual = schema.validFilesCount?.isEqual ?? true;
-            if (validCount < files[schema.key].length)
-                throw `files count must be ${isEqual ? `equals to ${validCount}` : `less than ${validCount}`}`;
+            const maxValidCount: number = schema.maxValidCount ?? 1;
+            const minValidCount: number = schema.minValidCount ?? 1;
+            const filesCount: number = files[schema.key]?.length ?? 0;
+            const isRequired: boolean = this.isRequired(schema);
+
+            if (isRequired || (!isRequired && filesCount > 0)) {
+                if (maxValidCount < filesCount || filesCount < minValidCount) {
+                    throw `files count must be ${minValidCount == maxValidCount ? `equals to ${minValidCount}` : `between ${minValidCount} & ${maxValidCount}`}`;
+                }
+            }
+
         });
     }
 
     public validateFilesRequired(files: any) {
         this.schemaValidations?.files.forEach((schema: FormFileType) => {
-            if(this.isRequired(schema)) {
-                if(!files[schema.key])
+            if (this.isRequired(schema)) {
+                if (!files[schema.key])
                     throw `file is required: "${schema.fieldName}"`;
             }
         });

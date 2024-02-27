@@ -119,11 +119,7 @@ export type FormFileType = {
     saveTo: string;
     validMimeTypes: Array<string>;
     validSizeInMB: number;
-    validFilesCount?: FileCount;
+    maxValidCount?: number;
+    minValidCount?: number;
     isRequire?: boolean,
-}
-
-export type FileCount = {
-    isEqual?: boolean,
-    value: number  
 }

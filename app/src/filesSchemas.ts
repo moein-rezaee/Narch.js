@@ -1,14 +1,12 @@
-import { FileCount, FormFileType } from "narch/src/types";
+import { FormFileType } from "narch/src/types";
 
 export const MeliCode: FormFileType = {
     key: "meliCode",
     fieldName: "meliCode",
     saveTo: "public/uploads",
     validMimeTypes: ["image/jpeg", "image/png", "image/jpg"],
-    validFilesCount: {
-        value: 2,
-        isEqual: false
-    } as FileCount,
+    maxValidCount: 4, 
+    minValidCount: 2, 
     validSizeInMB: 1,
     isRequire: true
 }
