@@ -1,31 +1,32 @@
 const busboy = require('busboy');
-import { RequestFilesHandler } from "./requestFilesHandler.js";
-import { FileInfo } from "./types.js";
-import { FileEventHandler } from "./fileEventHandler.js";
+import { FilesEventEmitter } from "./filesEventEmitter.js";
+import { FileInfo, ValidateResult } from "./types.js";
+import { FilesEventHandler } from "./filesEventHandler.js";
 import { FilesValidator } from "./validators/filesValidator.js";
 
 
 export class FormManager {
   private _data: any;
-  private _reqFilesHandler: RequestFilesHandler;
+  private _fileEventEmitter: FilesEventEmitter;
   constructor(filesValidator: FilesValidator) {
     this._data = {};
-    this._reqFilesHandler = this.getRequestFileHandler(filesValidator);
+    this._fileEventEmitter = this.getRequestFileHandler(filesValidator);
   }
 
   private getRequestFileHandler(filesValidator: FilesValidator) {
-    const fileEventHandler = new FileEventHandler(filesValidator);
-    return new RequestFilesHandler(fileEventHandler);
+    const fileEventHandler = new FilesEventHandler(filesValidator);
+    return new FilesEventEmitter(fileEventHandler);
   }
 
   public async parse(req: any) {
-    const self= this;
+    const self = this;
     return new Promise((resolve, reject) => {
+      const parser = self.getParser(req.headers);
       try {
-        const parser = self.getParser(req.headers);
-        self.bindEvents(parser, resolve);
+        self.bindEvents(parser, resolve, reject);
         req.pipe(parser);
       } catch (err) {
+        req.unpipe(parser)
         reject(err);
       }
     });
@@ -34,17 +35,27 @@ export class FormManager {
   private getParser(headers: any): any {
     return busboy({ headers });
   }
-
-  private bindEvents(parser: any, resolve: Function) {
+  private bindEvents(parser: any, resolve: Function, reject: Function) {
     const self = this;
+
     parser.on("field", (name: string, val: any) => self.field.call(self, name, val));
-    parser.on("file", async (name: string, data: any, info: any) => self.file.call(self, name, data, info));
+    parser.on("file", async (name: string, data: any, info: any) => {
+
+      const result = await self.file.call(self, name, data, info);
+      reject(result); // if there is an error we call
+    });
     parser.on("close", () => {
-      const files: any = self._reqFilesHandler.callClose();
-      const from = { 
-        data: self._data, 
-        files 
-      };  
+
+      try {
+        self._fileEventEmitter.callClose();
+      } catch (error) {
+        reject(error);
+      }
+
+      const from = {
+        data: self._data,
+      };
+      //TODO: files: result.data
       resolve(from);
     });
   }
@@ -52,8 +63,7 @@ export class FormManager {
   private field(name: string, val: any): void {
     this._data[name] = val;
   }
-
-  private async file(name: string, file: any, { filename, mimeType }: any): Promise<void> {
+  private async file(name: string, file: any, { filename, mimeType }: any): Promise<any> {
     // TODO: if filename.isExist() and is validate then add file
     const fileInfo: FileInfo = {
       data: file,
@@ -61,25 +71,30 @@ export class FormManager {
       filename,
       mimeType,
     };
-    
-    this._reqFilesHandler.callReceive(fileInfo);
-    await this.recivedFile(file);
+    try {
+      this._fileEventEmitter.callReceive(fileInfo);
+      await this.recivedFile(file);
+    } catch (error) {
+      return error;
+    }
   }
-
   private async recivedFile(file: any): Promise<number> {
     let size: number = 0;
+    let err: any = null;
     return new Promise((resolve: Function, reject: Function) => {
-      try {
-        file.on('data', (chunk: string) => {
-          size += chunk.length;
-          this._reqFilesHandler.callStream(chunk, size);
-        }).on('close', () => {
-          this._reqFilesHandler.callEndStream(size);
-          resolve(size);
-        });
-      } catch (err) {
-        reject(err);
-      }
+      file.on('data', (chunk: string) => {
+        size += chunk.length;
+        try {
+          this._fileEventEmitter.callStream(chunk, size);
+        } catch (error) {
+          file.destroy();
+          err = error;
+        }
+      }).on('close', () => {
+        this._fileEventEmitter.callEndStream(size);
+        if (err) reject(err);
+        else resolve(size);
+      });
     });
   }
 }

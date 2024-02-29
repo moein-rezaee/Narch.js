@@ -16,5 +16,6 @@ export const Profile: FormFileType = {
     fieldName: "image",
     saveTo: "public/uploads/users",
     validMimeTypes: ["image/jpeg", "image/png", "image/jpg"],
-    validSizeInMB: 1
+    validSizeInMB: 1,
+    isRequire: true
 }

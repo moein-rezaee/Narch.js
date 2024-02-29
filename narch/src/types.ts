@@ -100,14 +100,15 @@ export type ValidateObject = {
     dataValidator: FieldDecoratorType
 }
 
-export type ValidateResultType = {
-    result: boolean,
-    errorMessage: string
+export type ValidateResult = {
+    isValid: boolean,
+    error?: string,
+    data?: any
 }
 
 
 export type FormFilesDecoratorType = {
-        files: Array<FormFileType>,
+    files: Array<FormFileType>,
     context: ContextInfo,
     funcName: string | symbol
 }
@@ -122,4 +123,17 @@ export type FormFileType = {
     maxValidCount?: number;
     minValidCount?: number;
     isRequire?: boolean,
+}
+
+export type FilesCountData = {
+    files: any,
+    schema: FormFileType,
+    isRequired: boolean,
+}
+
+export type FilesCountDetails = {
+    maxValidCount: number,
+    minValidCount: number,
+    filesCount: number,
+    isRequired: boolean,
 }
