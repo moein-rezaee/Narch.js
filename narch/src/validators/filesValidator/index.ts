@@ -1,5 +1,5 @@
-import { FormFilesDecoratorManager } from "../decorators/formFilesDecorator/manager";
-import { FilesCountData, FormFileType, FormFilesDecoratorType, ValidateResult } from "../types";
+import { FormFilesDecoratorManager } from "../../decorators/formFilesDecorator/manager";
+import { FilesCountData, FormFileType, FormFilesDecoratorType, ValidateResult } from "../../types";
 import { FilesCountValidator } from "./filesCountValidator";
 
 export class FilesValidator {

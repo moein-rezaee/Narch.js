@@ -1,4 +1,4 @@
-import { FilesCountData, FilesCountDetails, ValidateResult } from "../types";
+import { FilesCountData, FilesCountDetails, ValidateResult } from "../../types";
 
 export class FilesCountValidator {
     private _details: FilesCountDetails;

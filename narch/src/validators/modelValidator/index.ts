@@ -1,5 +1,5 @@
-import { ModelDecoratorManager } from "../decorators/modelDecorator/manager";
-import { ModelDecoratorType } from "./../types";
+import { ModelDecoratorManager } from "../../decorators/modelDecorator/manager";
+import { ModelDecoratorType } from "../../types";
 import { ModelInitializer } from "./modelInitializer";
 import { PropValidator } from "./propValidator";
 

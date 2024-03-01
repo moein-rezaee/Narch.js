@@ -1,5 +1,5 @@
 import { FieldDecoratorType } from "../../types";
-import { CompareValidator, EmailValidator, LengthValidator, MaxLengthValidator, MeliCodeValidator, MinLengthValidator, MobileValidator, PostalCodeValidator, RangeValidator, RequireValidator, UrlValidator, MaxValidator, MinValidator } from "../../validators/dataValidators";
+import { CompareValidator, EmailValidator, LengthValidator, MaxLengthValidator, MeliCodeValidator, MinLengthValidator, MobileValidator, PostalCodeValidator, RangeValidator, RequireValidator, UrlValidator, MaxValidator, MinValidator } from "../../validators/modelValidator/dataValidators";
 import { FieldDecoratorManager } from "./manager";
 
 export class FieldDecorator {

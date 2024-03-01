@@ -1,5 +1,5 @@
-import { FieldDecoratorManager } from "../decorators/fieldDecorator/manager";
-import { FieldDecoratorType } from "../types";
+import { FieldDecoratorManager } from "../../decorators/fieldDecorator/manager";
+import { FieldDecoratorType } from "../../types";
 
 export class PropValidator {
   dataValidator: Array<FieldDecoratorType> = [];

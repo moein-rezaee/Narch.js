@@ -1,4 +1,4 @@
-import { FieldDecoratorType, ValidateObject, ValidateResultType } from "../types";
+import { FieldDecoratorType, ValidateObject, ValidateResult } from "../../types";
 
 export class ModelInitializer {
     private _validateResult: any = {};
@@ -68,7 +68,7 @@ export class ModelInitializer {
 
         const key: string = this.getFieldDecoratorKey(dataValidator.key, prop);
         const result = this.getValidateResultAsBool(validateObject);
-        const validateResult: ValidateResultType = this.getValidateResult(result, dataValidator.validator.message);
+        const validateResult: ValidateResult = this.getValidateResult(result, dataValidator.validator.message);
 
         if (this.validateResultIsExist(prop)) {
             this._validateResult[prop][key] = validateResult;
@@ -79,12 +79,12 @@ export class ModelInitializer {
         }
     }
 
-    private getValidateResult(result: boolean, errorMessage: string): ValidateResultType {
-        this.setModelValidateResult(result);
+    private getValidateResult(isValid: boolean, error: string): ValidateResult {
+        this.setModelValidateResult(isValid);
         return {
-            result,
-            errorMessage
-        } as ValidateResultType;
+            isValid,
+            error
+        } as ValidateResult;
     }
 
     setModelValidateResult(result: boolean) {

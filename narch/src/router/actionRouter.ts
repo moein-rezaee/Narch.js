@@ -1,4 +1,4 @@
-import { ModelValidator } from './../validators/modelValidator';
+import { ModelValidator } from '../validators/modelValidator';
 import { Action, RouterMethod } from "../types";
 import { FilesValidator } from '../validators/filesValidator';
 

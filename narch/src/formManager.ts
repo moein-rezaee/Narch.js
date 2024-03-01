@@ -2,7 +2,7 @@ const busboy = require('busboy');
 import { FilesEventEmitter } from "./requestFileHandler/filesEventEmitter.js";
 import { FileInfo, ValidateResult } from "./types.js";
 import { FilesEventHandler } from "./requestFileHandler/filesEventHandler.js";
-import { FilesValidator } from "./validators/filesValidator.js";
+import { FilesValidator } from "./validators/filesValidator/index.js";
 import { RequestFilesHandler } from "./requestFileHandler/index.js";
 
 
