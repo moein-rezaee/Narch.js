@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import { FileInfo, ValidateResult } from './types';
+import { FileInfo, ValidateResult } from '../types';
 import { FilesEventHandler } from './filesEventHandler';
 
 // const eventEmitter = new EventEmitter();
@@ -29,8 +29,8 @@ export class FilesEventEmitter {
   public callEndStream(size: number): void {
     this._event.emit("onEndStream", size);
   }
-  public callClose(): void {
-    this._event?.emit("onClose");
+  public callClose(files: any): void {
+    this._event?.emit("onClose", files);
   }
 }
 

@@ -69,15 +69,15 @@ export type RouterMethod = {
 };
 
 export type FileInfo = {
-    data: any,
     fieldName: string,
     filename: string,
     mimeType: string,
+    stream?: any,
     size?: number,
 }
 
 export type FileDataInfo = {
-    data: any,
+    stream: any,
     fieldName: string,
     size: any,
     ext: string,

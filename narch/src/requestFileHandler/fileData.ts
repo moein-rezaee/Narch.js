@@ -1,13 +1,13 @@
 import fs from 'fs';
 import path from 'path';
-import { FileDataInfo, FileInfo } from './types';
+import { FileDataInfo, FileInfo } from '../types';
 
 
 export class FileData {
   private info: FileDataInfo;
   constructor(info: FileInfo) {
     this.info = {
-      data: info.data,
+      stream: info.stream,
       fieldName: info.fieldName,
       size: this.getFileSizeByUnits(info.size),
       ext: this.getExtension(info.filename),
@@ -40,11 +40,11 @@ export class FileData {
   }
 
   public save(basePath: string, newName: string) {
-    const { data, filename, ext } = this.info;
+    const { stream, filename, ext } = this.info;
     const saveTo = path.join(basePath, `/${newName ?? filename}.${ext}`);
     this.info.address = saveTo;
     const fileStream = fs.createWriteStream(saveTo, 'utf8');
-    data.pipe(fileStream);
+    stream.pipe(fileStream);
     return saveTo;
   }
 }
