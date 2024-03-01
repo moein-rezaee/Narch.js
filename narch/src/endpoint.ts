@@ -1,5 +1,5 @@
 import { IEndpoint, IPatternMatcher, IRouter } from "./interfaces.js";
-import { Action, FieldDecoratorType, MatchedDetail, MatchedPattern } from "./types.js";
+import { Action, MatchedDetail, MatchedPattern } from "./types.js";
 import Router from "./router/index.js";
 import { PatternMatcher } from "./router/pattern-handler/patternMatcher";
 
